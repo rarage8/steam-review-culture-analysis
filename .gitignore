@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+.env
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb~
+
+# データ（大量ファイルはGit管理外）
+data/raw/
+data/processed/
+data/classified/
+
+# 生成物
+figures/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code内部ファイル
+.claude/
+
+# APIキー・秘匿情報
+.env
+secrets.json
