@@ -274,8 +274,9 @@
     .lang-card .flag   { font-size: 1.9rem; line-height: 1; margin-bottom: 8px; }
     .lang-card .name   { font-size: 0.92rem; font-weight: 600; color: rgba(255,255,255,0.92); margin-bottom: 10px; }
     .lang-card .rate   { font-size: 1.9rem; font-weight: 800; color: #fff; letter-spacing: -1px; line-height: 1; margin-bottom: 5px; }
-    .lang-card .counts { font-size: 0.76rem; color: rgba(255,255,255,0.65); display: flex; gap: 8px; }
+    .lang-card .counts { font-size: 0.76rem; color: rgba(255,255,255,0.65); display: flex; gap: 6px; flex-wrap: wrap; }
     .count-pos { color: rgba(160,230,200,0.9); }
+    .count-neu { color: rgba(255,210,100,0.9); }
     .count-neg { color: rgba(255,180,160,0.9); }
     .lang-card .hint   { position: absolute; bottom: 8px; right: 12px; font-size: 0.68rem; color: rgba(255,255,255,0.38); }
 
@@ -314,11 +315,15 @@
     }
     .panel-close:hover { background: var(--surface2); color: var(--text); }
 
-    .panel-columns { display: grid; grid-template-columns: 1fr 1fr; }
-    @media (max-width: 560px) { .panel-columns { grid-template-columns: 1fr; } }
+    /* 3-column review panel */
+    .review-panel { max-width: 1020px; }
+    .panel-columns { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+    @media (max-width: 720px) { .panel-columns { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .panel-columns { grid-template-columns: 1fr; } }
 
-    .col-pos, .col-neg { padding: 18px; max-height: 460px; overflow-y: auto; }
+    .col-pos, .col-neu, .col-neg { padding: 18px; max-height: 460px; overflow-y: auto; }
     .col-pos { border-right: 1px solid var(--border); }
+    .col-neu { border-right: 1px solid var(--border); }
 
     .col-heading {
       font-size: 0.76rem;
@@ -328,6 +333,7 @@
       margin-bottom: 12px;
     }
     .col-pos .col-heading { color: #4ade80; }
+    .col-neu .col-heading { color: #fbbf24; }
     .col-neg .col-heading { color: #f87171; }
 
     .review-item {
@@ -341,12 +347,34 @@
       border-left: 3px solid transparent;
     }
     .col-pos .review-item { border-left-color: #4ade8055; }
+    .col-neu .review-item { border-left-color: #fbbf2455; }
     .col-neg .review-item { border-left-color: #f8717155; }
 
     .no-reviews { color: var(--text3); font-size: 0.84rem; text-align: center; padding: 28px 0; }
 
-    .col-pos::-webkit-scrollbar, .col-neg::-webkit-scrollbar { width: 4px; }
-    .col-pos::-webkit-scrollbar-thumb, .col-neg::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .col-pos::-webkit-scrollbar, .col-neu::-webkit-scrollbar, .col-neg::-webkit-scrollbar { width: 4px; }
+    .col-pos::-webkit-scrollbar-thumb, .col-neu::-webkit-scrollbar-thumb, .col-neg::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    /* chart type toggle */
+    .chart-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .chart-type-btn {
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      color: var(--text2);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .chart-type-btn:hover { border-color: var(--accent); color: var(--text); }
+    .chart-type-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
     /* ─── Population page ─────────────────────────────────── */
     .chart-card {
@@ -446,6 +474,10 @@
             <div class="col-heading" id="colPosHd"></div>
             <div id="posReviews"></div>
           </div>
+          <div class="col-neu">
+            <div class="col-heading" id="colNeuHd"></div>
+            <div id="neuReviews"></div>
+          </div>
           <div class="col-neg">
             <div class="col-heading" id="colNegHd"></div>
             <div id="negReviews"></div>
@@ -461,6 +493,10 @@
         <p  id="popSub"></p>
       </div>
       <div class="game-selector" id="gameSelPop"></div>
+      <div class="chart-toggle">
+        <button class="chart-type-btn active" id="btnChartReviews" data-chart="reviews"></button>
+        <button class="chart-type-btn"        id="btnChartPlaytime" data-chart="playtime"></button>
+      </div>
       <div class="chart-card">
         <div class="chart-canvas-wrap">
           <canvas id="popChart"></canvas>
@@ -483,16 +519,23 @@ const I18N = {
     reviews_hd:      "国別レビュー分析",
     reviews_sub:     "言語圏ごとのレビュー傾向を比較する — 青＝好意的 / 赤＝批判的",
     pop_hd:          "プレイヤー人口",
-    pop_sub:         "言語別のレビュー投稿数（プレイヤー参加度の代理指標）",
-    pop_note:        "※ レビュー投稿数をプレイヤー参加度の代理指標として使用しています。Steamは公式の言語別プレイヤー数を公開していません。",
+    pop_sub:         "言語別の分析データ（レビュー数 または レビュー前プレイ時間）",
+    pop_note_reviews:  "※ レビュー投稿数をプレイヤー参加度の代理指標として使用しています。Steamは公式の言語別プレイヤー数を公開していません。",
+    pop_note_playtime: "※ レビュー執筆時点でのプレイ時間（時間単位）の平均値。購入からレビューまでの参加度を示す代理指標です。",
     positive:        "ポジティブ",
+    neutral:         "ニュートラル",
     negative:        "ネガティブ",
     click_hint:      "クリックで詳細",
     no_reviews:      "レビューなし",
     load_err:        "データ読み込みエラー",
+    chart_reviews:   "📊 レビュー数",
+    chart_playtime:  "⏱ レビュー前プレイ時間",
     chart_pos:       "ポジティブ",
+    chart_neu:       "ニュートラル",
     chart_neg:       "ネガティブ",
+    chart_playtime_lbl: "レビュー前の平均プレイ時間（時間）",
     chart_total:     "合計",
+    chart_hours:     "時間",
   },
   english: {
     topbar_sub:      "Compare review trends by language region",
@@ -502,16 +545,23 @@ const I18N = {
     reviews_hd:      "Regional Review Analysis",
     reviews_sub:     "Compare review trends by language — blue=positive / red=negative",
     pop_hd:          "Player Population",
-    pop_sub:         "Review counts by language (proxy for player engagement)",
-    pop_note:        "* Review counts are used as a proxy for player engagement. Steam does not publish official player counts by language.",
+    pop_sub:         "Review counts or playtime before review, by language",
+    pop_note_reviews:  "* Review counts are used as a proxy for player engagement. Steam does not publish official player counts by language.",
+    pop_note_playtime: "* Average playtime (hours) at the time of writing the review. Proxy for engagement before reviewing.",
     positive:        "Positive",
+    neutral:         "Neutral",
     negative:        "Negative",
     click_hint:      "Click for details",
     no_reviews:      "No reviews",
     load_err:        "Data load error",
+    chart_reviews:   "📊 Review Counts",
+    chart_playtime:  "⏱ Playtime Before Review",
     chart_pos:       "Positive",
+    chart_neu:       "Neutral",
     chart_neg:       "Negative",
+    chart_playtime_lbl: "Avg. playtime before review (hours)",
     chart_total:     "Total",
+    chart_hours:     "hrs",
   },
   schinese: {
     topbar_sub:      "比较各语区的评测趋势",
@@ -521,16 +571,23 @@ const I18N = {
     reviews_hd:      "地区评测分析",
     reviews_sub:     "比较各语言区的评测趋势 — 蓝色=好评 / 红色=差评",
     pop_hd:          "玩家人口",
-    pop_sub:         "各语言评测数量（玩家参与度代理指标）",
-    pop_note:        "※ 使用评测数量作为玩家参与度的替代指标。Steam 不公开各语言的官方玩家数量。",
+    pop_sub:         "各语言评测数量或评测前游戏时长",
+    pop_note_reviews:  "※ 使用评测数量作为玩家参与度的替代指标。Steam 不公开各语言的官方玩家数量。",
+    pop_note_playtime: "※ 撰写评测时的平均游戏时长（小时）。用于衡量玩家在评测前的参与深度。",
     positive:        "好评",
+    neutral:         "中立",
     negative:        "差评",
     click_hint:      "点击查看详情",
     no_reviews:      "暂无评测",
     load_err:        "数据加载错误",
+    chart_reviews:   "📊 评测数量",
+    chart_playtime:  "⏱ 评测前游戏时长",
     chart_pos:       "好评",
+    chart_neu:       "中立",
     chart_neg:       "差评",
+    chart_playtime_lbl: "评测前平均游戏时长（小时）",
     chart_total:     "合计",
+    chart_hours:     "小时",
   },
   russian: {
     topbar_sub:      "Сравните тенденции отзывов по регионам",
@@ -540,16 +597,23 @@ const I18N = {
     reviews_hd:      "Анализ отзывов по регионам",
     reviews_sub:     "Сравните тенденции по языкам — синий=положит. / красный=отриц.",
     pop_hd:          "Игроки по регионам",
-    pop_sub:         "Количество отзывов по языкам (показатель вовлечённости)",
-    pop_note:        "※ Количество отзывов используется как показатель вовлечённости. Steam не публикует официальную статистику по языкам.",
+    pop_sub:         "Количество отзывов или время игры перед отзывом",
+    pop_note_reviews:  "※ Количество отзывов используется как показатель вовлечённости. Steam не публикует официальную статистику по языкам.",
+    pop_note_playtime: "※ Среднее время игры (в часах) на момент написания отзыва. Показатель вовлечённости до отзыва.",
     positive:        "Положительные",
+    neutral:         "Нейтральные",
     negative:        "Отрицательные",
     click_hint:      "Нажмите для деталей",
     no_reviews:      "Нет отзывов",
     load_err:        "Ошибка загрузки данных",
+    chart_reviews:   "📊 Количество отзывов",
+    chart_playtime:  "⏱ Время до отзыва",
     chart_pos:       "Положит.",
+    chart_neu:       "Нейтр.",
     chart_neg:       "Отриц.",
+    chart_playtime_lbl: "Среднее время игры до отзыва (часы)",
     chart_total:     "Итого",
+    chart_hours:     "ч",
   },
   german: {
     topbar_sub:      "Bewertungstrends nach Sprachregion vergleichen",
@@ -559,16 +623,23 @@ const I18N = {
     reviews_hd:      "Regionale Bewertungsanalyse",
     reviews_sub:     "Bewertungstrends nach Sprache vergleichen — blau=positiv / rot=negativ",
     pop_hd:          "Spielerpopulation",
-    pop_sub:         "Bewertungsanzahl nach Sprache (Indikator für Spielerbeteiligung)",
-    pop_note:        "※ Bewertungsanzahl wird als Indikator für Spielerbeteiligung verwendet. Steam veröffentlicht keine offiziellen Spielerzahlen nach Sprache.",
+    pop_sub:         "Bewertungsanzahl oder Spielzeit vor der Bewertung nach Sprache",
+    pop_note_reviews:  "※ Bewertungsanzahl wird als Indikator für Spielerbeteiligung verwendet. Steam veröffentlicht keine offiziellen Spielerzahlen nach Sprache.",
+    pop_note_playtime: "※ Durchschnittliche Spielzeit (Stunden) zum Zeitpunkt der Bewertung. Proxy für Engagement vor der Bewertung.",
     positive:        "Positiv",
+    neutral:         "Neutral",
     negative:        "Negativ",
     click_hint:      "Klicken für Details",
     no_reviews:      "Keine Bewertungen",
     load_err:        "Datenfehler",
+    chart_reviews:   "📊 Bewertungsanzahl",
+    chart_playtime:  "⏱ Spielzeit vor Bewertung",
     chart_pos:       "Positiv",
+    chart_neu:       "Neutral",
     chart_neg:       "Negativ",
+    chart_playtime_lbl: "Durchschn. Spielzeit vor Bewertung (Std.)",
     chart_total:     "Gesamt",
+    chart_hours:     "Std.",
   },
   koreana: {
     topbar_sub:      "언어권별 리뷰 트렌드 비교",
@@ -578,16 +649,23 @@ const I18N = {
     reviews_hd:      "지역별 리뷰 분석",
     reviews_sub:     "언어별 리뷰 트렌드 비교 — 파랑=긍정 / 빨강=부정",
     pop_hd:          "플레이어 인구",
-    pop_sub:         "언어별 리뷰 수 (플레이어 참여도 대리 지표)",
-    pop_note:        "※ 리뷰 수를 플레이어 참여도의 대리 지표로 사용합니다. Steam은 언어별 공식 플레이어 수를 공개하지 않습니다.",
+    pop_sub:         "언어별 리뷰 수 또는 리뷰 전 플레이 시간",
+    pop_note_reviews:  "※ 리뷰 수를 플레이어 참여도의 대리 지표로 사용합니다. Steam은 언어별 공식 플레이어 수를 공개하지 않습니다.",
+    pop_note_playtime: "※ 리뷰 작성 시점의 평균 플레이 시간(시간 단위). 리뷰 전 참여도 지표입니다.",
     positive:        "긍정적",
+    neutral:         "중립",
     negative:        "부정적",
     click_hint:      "클릭하여 자세히",
     no_reviews:      "리뷰 없음",
     load_err:        "데이터 로드 오류",
+    chart_reviews:   "📊 리뷰 수",
+    chart_playtime:  "⏱ 리뷰 전 플레이 시간",
     chart_pos:       "긍정",
+    chart_neu:       "중립",
     chart_neg:       "부정",
+    chart_playtime_lbl: "리뷰 전 평균 플레이 시간 (시간)",
     chart_total:     "합계",
+    chart_hours:     "시간",
   },
 };
 
@@ -629,6 +707,7 @@ let currentPage = 'reviews';
 let currentGame = null;
 let selectedLang = null;
 let popChart    = null;
+let chartMode   = 'reviews';  // 'reviews' | 'playtime'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────
 const t = key => (I18N[uiLang] || I18N.japanese)[key] || key;
@@ -664,35 +743,41 @@ function applyUiLang(lang) {
 }
 
 function refreshI18n() {
-  document.getElementById('topbarSub').textContent    = t('topbar_sub');
-  document.getElementById('navLabel').textContent     = t('nav_label');
+  document.getElementById('topbarSub').textContent     = t('topbar_sub');
+  document.getElementById('navLabel').textContent      = t('nav_label');
   document.getElementById('navReviewsTxt').textContent = t('nav_reviews');
-  document.getElementById('navPopTxt').textContent    = t('nav_pop');
-  document.getElementById('reviewsHd').textContent    = t('reviews_hd');
-  document.getElementById('reviewsSub').textContent   = t('reviews_sub');
-  document.getElementById('popHd').textContent        = t('pop_hd');
-  document.getElementById('popSub').textContent       = t('pop_sub');
-  document.getElementById('chartNote').textContent    = t('pop_note');
-  document.getElementById('colPosHd').textContent     = `▲ ${t('positive')}`;
-  document.getElementById('colNegHd').textContent     = `▼ ${t('negative')}`;
+  document.getElementById('navPopTxt').textContent     = t('nav_pop');
+  document.getElementById('reviewsHd').textContent     = t('reviews_hd');
+  document.getElementById('reviewsSub').textContent    = t('reviews_sub');
+  document.getElementById('popHd').textContent         = t('pop_hd');
+  document.getElementById('popSub').textContent        = t('pop_sub');
+  document.getElementById('colPosHd').textContent      = `▲ ${t('positive')}`;
+  document.getElementById('colNeuHd').textContent      = `◆ ${t('neutral')}`;
+  document.getElementById('colNegHd').textContent      = `▼ ${t('negative')}`;
+  document.getElementById('btnChartReviews').textContent  = t('chart_reviews');
+  document.getElementById('btnChartPlaytime').textContent = t('chart_playtime');
+  syncChartNote();
 
   if (!data) return;
-
-  // Re-render cards with new language labels
   if (currentGame) renderCards(currentGame);
 
-  // Re-render open review panel
   if (selectedLang && currentGame) {
     const langInfo = LANGS[selectedLang];
     const game = data.games.find(g => g.id === currentGame);
     document.getElementById('panelTitle').textContent =
       `${langInfo.label[uiLang]} — ${game.title}`;
     renderReviews('posReviews', getReviews(currentGame, selectedLang, 'positive'));
+    renderReviews('neuReviews', getReviews(currentGame, selectedLang, 'neutral'));
     renderReviews('negReviews', getReviews(currentGame, selectedLang, 'negative'));
   }
 
-  // Re-render chart with updated labels
   if (popChart && currentGame) renderPopChart(currentGame);
+}
+
+function syncChartNote() {
+  const key = chartMode === 'playtime' ? 'pop_note_playtime' : 'pop_note_reviews';
+  const el = document.getElementById('chartNote');
+  if (el) el.textContent = t(key) || t('pop_note_reviews');
 }
 
 document.getElementById('uiLangSel').addEventListener('change', e => {
@@ -772,8 +857,9 @@ function renderCards(gameId) {
   Object.entries(LANGS).forEach(([langKey, langInfo]) => {
     const d = gameData[langKey];
     if (!d) return;
-    const rate = d.approval_rate;
-    const pct  = Math.round(rate * 100);
+    const rate    = d.approval_rate;
+    const pct     = Math.round(rate * 100);
+    const neuCount = d.neu_count || 0;
     const card = document.createElement('div');
     card.className = 'lang-card' + (langKey === selectedLang ? ' selected' : '');
     card.dataset.lang  = langKey;
@@ -784,6 +870,7 @@ function renderCards(gameId) {
       <div class="rate">${pct}%</div>
       <div class="counts">
         <span class="count-pos">▲ ${d.pos_count}</span>
+        ${neuCount > 0 ? `<span class="count-neu">◆ ${neuCount}</span>` : ''}
         <span class="count-neg">▼ ${d.neg_count}</span>
       </div>
       <div class="hint">${t('click_hint')}</div>
@@ -794,15 +881,13 @@ function renderCards(gameId) {
 }
 
 // ─── Review display logic ─────────────────────────────────────────────────
-// If UI language matches the card's source language → show original text.
-// Otherwise → show English translation (positive / negative).
+// Always show original-language text (_orig fields).
+// Fall back to English translation only if _orig is missing/empty.
 function getReviews(gameId, langKey, polarity) {
   const d = data.reviews[gameId][langKey];
   if (!d) return [];
   const origKey = `${polarity}_orig`;
-  if (uiLang === langKey && d[origKey] && d[origKey].length > 0) {
-    return d[origKey];
-  }
+  if (d[origKey] && d[origKey].length > 0) return d[origKey];
   return d[polarity] || [];
 }
 
@@ -817,6 +902,7 @@ function openPanel(gameId, langKey) {
   document.getElementById('panelFlag').textContent  = langInfo.flag;
   document.getElementById('panelTitle').textContent = `${langInfo.label[uiLang]} — ${game.title}`;
   renderReviews('posReviews', getReviews(gameId, langKey, 'positive'));
+  renderReviews('neuReviews', getReviews(gameId, langKey, 'neutral'));
   renderReviews('negReviews', getReviews(gameId, langKey, 'negative'));
   const panel = document.getElementById('reviewPanel');
   panel.classList.add('visible');
@@ -851,40 +937,75 @@ function renderPopChart(gameId) {
   const gameData = data.reviews[gameId];
   const langKeys = Object.keys(LANGS);
   const labels   = langKeys.map(k => `${LANGS[k].flag} ${LANGS[k].label[uiLang]}`);
-  const posData  = langKeys.map(k => gameData[k]?.pos_count || 0);
-  const negData  = langKeys.map(k => gameData[k]?.neg_count || 0);
 
-  const isDark    = theme === 'dark';
-  const textClr   = isDark ? '#9aa3b8' : '#4a5275';
-  const gridClr   = isDark ? '#2a3047' : '#c8d0e8';
+  const isDark     = theme === 'dark';
+  const textClr    = isDark ? '#9aa3b8' : '#4a5275';
+  const gridClr    = isDark ? '#2a3047' : '#c8d0e8';
   const surfaceClr = isDark ? '#1c2030' : '#e8edf8';
 
   const ctx = document.getElementById('popChart').getContext('2d');
   if (popChart) popChart.destroy();
 
+  let datasets, yLabel, tooltipCallbacks;
+
+  if (chartMode === 'playtime') {
+    const ptData = langKeys.map(k => {
+      const h = gameData[k]?.avg_playtime_review_h;
+      return (h != null) ? Math.round(h * 10) / 10 : null;
+    });
+    datasets = [
+      {
+        label: t('chart_playtime_lbl'),
+        data: ptData,
+        backgroundColor: 'rgba(129,140,248,0.7)',
+        borderColor: 'rgba(129,140,248,0.9)',
+        borderWidth: 1,
+        borderRadius: 6,
+      },
+    ];
+    yLabel = t('chart_hours');
+    tooltipCallbacks = {
+      label: item => `${item.dataset.label}: ${item.raw} ${t('chart_hours')}`
+    };
+  } else {
+    const posData = langKeys.map(k => gameData[k]?.pos_count || 0);
+    const neuData = langKeys.map(k => gameData[k]?.neu_count || 0);
+    const negData = langKeys.map(k => gameData[k]?.neg_count || 0);
+    datasets = [
+      {
+        label: t('chart_pos'),
+        data: posData,
+        backgroundColor: 'rgba(74,222,128,0.7)',
+        borderColor: 'rgba(74,222,128,0.9)',
+        borderWidth: 1,
+        borderRadius: 6,
+      },
+      {
+        label: t('chart_neu'),
+        data: neuData,
+        backgroundColor: 'rgba(251,191,36,0.7)',
+        borderColor: 'rgba(251,191,36,0.9)',
+        borderWidth: 1,
+        borderRadius: 6,
+      },
+      {
+        label: t('chart_neg'),
+        data: negData,
+        backgroundColor: 'rgba(248,113,113,0.7)',
+        borderColor: 'rgba(248,113,113,0.9)',
+        borderWidth: 1,
+        borderRadius: 6,
+      },
+    ];
+    yLabel = t('chart_reviews') || '';
+    tooltipCallbacks = {
+      footer: items => `${t('chart_total')}: ${items.reduce((s, i) => s + i.raw, 0)}`
+    };
+  }
+
   popChart = new Chart(ctx, {
     type: 'bar',
-    data: {
-      labels,
-      datasets: [
-        {
-          label: t('chart_pos'),
-          data: posData,
-          backgroundColor: 'rgba(74,222,128,0.7)',
-          borderColor: 'rgba(74,222,128,0.9)',
-          borderWidth: 1,
-          borderRadius: 6,
-        },
-        {
-          label: t('chart_neg'),
-          data: negData,
-          backgroundColor: 'rgba(248,113,113,0.7)',
-          borderColor: 'rgba(248,113,113,0.9)',
-          borderWidth: 1,
-          borderRadius: 6,
-        },
-      ],
-    },
+    data: { labels, datasets },
     options: {
       responsive: true,
       maintainAspectRatio: false,
@@ -898,9 +1019,7 @@ function renderPopChart(gameId) {
           bodyColor: textClr,
           borderColor: gridClr,
           borderWidth: 1,
-          callbacks: {
-            footer: items => `${t('chart_total')}: ${items.reduce((s,i) => s + i.raw, 0)}`
-          }
+          callbacks: tooltipCallbacks,
         }
       },
       scales: {
@@ -912,11 +1031,24 @@ function renderPopChart(gameId) {
           ticks: { color: textClr },
           grid:  { color: gridClr },
           beginAtZero: true,
+          title: { display: !!yLabel, text: yLabel, color: textClr },
         }
       }
     }
   });
 }
+
+// ─── Chart type toggle ─────────────────────────────────────────────────────
+document.querySelectorAll('.chart-type-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    chartMode = btn.dataset.chart;
+    document.querySelectorAll('.chart-type-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.chart === chartMode)
+    );
+    syncChartNote();
+    if (currentGame) renderPopChart(currentGame);
+  });
+});
 
 // ─── Initialisation ────────────────────────────────────────────────────────
 // Restore preferences

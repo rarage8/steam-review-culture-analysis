@@ -65,6 +65,8 @@ CATEGORY_IDS = list(CATEGORIES.keys())
 
 _CATEGORY_JSON = json.dumps(CATEGORIES, indent=2)
 
+SENTIMENT_VALUES = {"positive", "neutral", "negative"}
+
 # ─── 分類 ────────────────────────────────────────────────────────────────────
 
 _SYSTEM_PROMPT = (
@@ -152,6 +154,71 @@ def classify_batch(
     return [[] for _ in texts]
 
 
+def classify_sentiment_batch(
+    texts: list[str],
+    client: anthropic.Anthropic,
+    max_retries: int = 3,
+) -> list[str]:
+    """
+    英語レビューのリストを positive / neutral / negative の3段階に分類する。
+
+    Steam のサム評価（voted_up）はレビュアーの主観であり，テキストの感情と
+    乖離することがある（例：問題を多く指摘しながら "推薦" するなど）。
+    本関数はテキスト内容に基づいてより正確な感情を判定する。
+
+    Returns
+    -------
+    list[str] : 各レビューの感情ラベル（"positive" / "neutral" / "negative"）
+                分類失敗時は "" を返す
+    """
+    if not texts:
+        return []
+
+    numbered_block = "\n---\n".join(
+        f"[{i + 1}]\n{text}" for i, text in enumerate(texts)
+    )
+
+    prompt = (
+        "Classify each Steam game review as exactly one of: positive, neutral, negative.\n"
+        "  positive – overall recommends or praises the game\n"
+        "  neutral  – mixed feelings; acknowledges both merits and problems\n"
+        "  negative – overall criticises or does not recommend the game\n"
+        "The reviewer's thumbs-up/thumbs-down may not match the actual tone; classify by text content.\n"
+        "Output ONLY a JSON array of strings, one per review, same order as input.\n"
+        'Example for 3 reviews: ["positive", "neutral", "negative"]\n\n'
+        f"Reviews:\n{numbered_block}\n\n"
+        "Output (JSON array only):"
+    )
+
+    for attempt in range(max_retries):
+        try:
+            response = client.messages.create(
+                model=MODEL,
+                max_tokens=1024,
+                system="You are a sentiment analyst. Return only valid JSON, no commentary.",
+                messages=[{"role": "user", "content": prompt}],
+            )
+            raw = response.content[0].text.strip()
+            match = re.search(r"\[.*\]", raw, re.DOTALL)
+            if match:
+                result: list[str] = json.loads(match.group(0))
+                if len(result) == len(texts) and all(s in SENTIMENT_VALUES for s in result):
+                    return result
+            logger.warning(
+                "Unexpected sentiment output (attempt %d/%d): %.100s...",
+                attempt + 1, max_retries, raw,
+            )
+        except (json.JSONDecodeError, anthropic.APIError) as e:
+            logger.warning(
+                "Sentiment error (attempt %d/%d): %s", attempt + 1, max_retries, e
+            )
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)
+
+    logger.error("Sentiment classification failed for batch of %d, returning empty", len(texts))
+    return ["" for _ in texts]
+
+
 # ─── ファイル処理 ─────────────────────────────────────────────────────────────
 
 
@@ -207,25 +274,29 @@ def classify_file(
 
     texts = df["review_text_en"].fillna("").tolist()
     all_categories: list[list[str]] = []
+    all_sentiments: list[str] = []
     total = len(texts)
 
     for i in range(0, total, CLASSIFY_BATCH_SIZE):
         batch = texts[i : i + CLASSIFY_BATCH_SIZE]
         cats = classify_batch(batch, client)
         all_categories.extend(cats)
+        sents = classify_sentiment_batch(batch, client)
+        all_sentiments.extend(sents)
         done = min(i + CLASSIFY_BATCH_SIZE, total)
-        logger.info("  → classified %d / %d", done, total)
+        logger.info("  → classified %d / %d (categories + sentiment)", done, total)
         time.sleep(0.3)  # レート制限対策
 
     # categories 列を JSON 文字列として保存（analyze.py で再パース）
     df["categories"] = [json.dumps(cats, ensure_ascii=False) for cats in all_categories]
+    df["sentiment"]  = all_sentiments  # "positive" / "neutral" / "negative" / ""
 
     # 列順を analyze.py が期待する形に整える
     output_cols = [
         "game", "language", "review_type",
         "review_text_en", "review_text_orig",
-        "voted_up", "playtime_forever",
-        "categories", "timestamp_created",
+        "voted_up", "playtime_forever", "playtime_at_review",
+        "categories", "sentiment", "timestamp_created",
     ]
     # 存在しない列はスキップ
     output_cols = [c for c in output_cols if c in df.columns or c == "categories"]

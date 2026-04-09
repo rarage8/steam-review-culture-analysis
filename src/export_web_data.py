@@ -99,17 +99,49 @@ def export(
                 lambda x: bool(x) if isinstance(x, (bool, int, float)) else str(x).lower() == "true"
             )
 
-            pos_df = df_all[df_all["voted_up"] == True]
-            neg_df = df_all[df_all["voted_up"] == False]
+            # ── 3段階感情分類 ──────────────────────────────────────
+            # sentiment 列がある（classify.py 実行済み）場合はそれを優先。
+            # なければ voted_up で二分割し neutral は空にする。
+            has_sentiment = (
+                "sentiment" in df_all.columns
+                and df_all["sentiment"].notna().any()
+                and (df_all["sentiment"].str.strip() != "").any()
+            )
 
-            total = len(df_all)
+            if has_sentiment:
+                pos_df = df_all[df_all["sentiment"] == "positive"]
+                neu_df = df_all[df_all["sentiment"] == "neutral"]
+                neg_df = df_all[df_all["sentiment"] == "negative"]
+                # sentiment が空の行は voted_up にフォールバック
+                unset = df_all[df_all["sentiment"].fillna("").str.strip() == ""]
+                pos_df = pd.concat([pos_df, unset[unset["voted_up"] == True]], ignore_index=True)
+                neg_df = pd.concat([neg_df, unset[unset["voted_up"] == False]], ignore_index=True)
+            else:
+                pos_df = df_all[df_all["voted_up"] == True]
+                neg_df = df_all[df_all["voted_up"] == False]
+                neu_df = pd.DataFrame()
+
+            total     = len(df_all)
             pos_count = len(pos_df)
+            neu_count = len(neu_df)
             neg_count = len(neg_df)
             approval_rate = pos_count / total if total > 0 else 0.0
 
-            # votes_up でソートしてサンプリング（なければ先頭N件）
+            # ── レビュー前プレイ時間（分 → 時間） ───────────────────
+            if "playtime_at_review" in df_all.columns:
+                avg_pt = df_all["playtime_at_review"].dropna()
+                avg_pt = avg_pt[avg_pt > 0]
+                avg_playtime_h = round(float(avg_pt.mean()) / 60, 1) if len(avg_pt) > 0 else 0.0
+            elif "playtime_forever" in df_all.columns:
+                avg_pt = df_all["playtime_forever"].dropna()
+                avg_pt = avg_pt[avg_pt > 0]
+                avg_playtime_h = round(float(avg_pt.mean()) / 60, 1) if len(avg_pt) > 0 else 0.0
+            else:
+                avg_playtime_h = 0.0
+
+            # ── サンプリング ─────────────────────────────────────────
             def sample_reviews(df: pd.DataFrame, n: int, col: str) -> list[str]:
-                if df.empty:
+                if df.empty or col not in df.columns:
                     return []
                 if "votes_up" in df.columns:
                     df = df.sort_values("votes_up", ascending=False)
@@ -117,18 +149,22 @@ def export(
                 return [t for t in texts[:n] if isinstance(t, str) and t.strip()]
 
             reviews_data[slug][lang] = {
-                "approval_rate": round(approval_rate, 4),
-                "pos_count":     pos_count,
-                "neg_count":     neg_count,
-                "positive":      sample_reviews(pos_df, sample_pos, "review_text_en"),
-                "negative":      sample_reviews(neg_df, sample_neg, "review_text_en"),
-                "positive_orig": sample_reviews(pos_df, sample_pos, "review_text_orig"),
-                "negative_orig": sample_reviews(neg_df, sample_neg, "review_text_orig"),
+                "approval_rate":          round(approval_rate, 4),
+                "pos_count":              pos_count,
+                "neu_count":              neu_count,
+                "neg_count":              neg_count,
+                "avg_playtime_review_h":  avg_playtime_h,
+                "positive":               sample_reviews(pos_df, sample_pos, "review_text_en"),
+                "neutral":                sample_reviews(neu_df, sample_pos, "review_text_en"),
+                "negative":               sample_reviews(neg_df, sample_neg, "review_text_en"),
+                "positive_orig":          sample_reviews(pos_df, sample_pos, "review_text_orig"),
+                "neutral_orig":           sample_reviews(neu_df, sample_pos, "review_text_orig"),
+                "negative_orig":          sample_reviews(neg_df, sample_neg, "review_text_orig"),
             }
 
             logger.info(
-                "%-25s | %-10s | pos=%3d  neg=%3d  rate=%.2f",
-                title, lang, pos_count, neg_count, approval_rate,
+                "%-25s | %-10s | pos=%3d  neu=%3d  neg=%3d  rate=%.2f  playtime=%.1fh",
+                title, lang, pos_count, neu_count, neg_count, approval_rate, avg_playtime_h,
             )
 
     output = {"games": games_meta, "reviews": reviews_data}

@@ -127,7 +127,7 @@ GAMES: list[tuple[str, int, str, str]] = [
     ("Risk of Rain 2",              632360,  "roguelite",     "US"),
     ("Noita",                       881100,  "roguelite",     "FI"),
     ("Vampire Survivors",           1794680, "roguelite",     "IT"),
-]
+]  # END_GAMES
 
 # 設計書の5タイトル（Phase 1 優先タイトル）
 CORE_GAMES: dict[str, int] = {

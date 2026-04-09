@@ -9,20 +9,29 @@
   "reviews": {
     "dark_souls_3": {
       "japanese": {
-        "approval_rate": 0.96, "pos_count": 99, "neg_count": 4,
+        "approval_rate": 0.88, "pos_count": 99, "neu_count": 12, "neg_count": 4,
+        "avg_playtime_review_h": 52.3,
         "positive": [
-          "High difficulty, but the sense of achievement when you overcome it is unlike anything else. Boss design is wonderful.",
+          "High difficulty, but the sense of achievement when you overcome it is unlike anything else.",
           "The pinnacle of Souls-like games. Within the apparent unfairness lies a design you can genuinely overcome.",
-          "The lore is deep. The more you read, the more you get absorbed into the world. The culmination of FromSoft's universe."
+          "The lore is deep. The more you read, the more you get absorbed into the world."
+        ],
+        "neutral": [
+          "The combat is exceptional, but the online community toxicity undermines the experience. Solo-only recommendation.",
+          "Masterful design offset by poor PC optimization and steep DLC pricing. A mixed bag overall."
         ],
         "negative": [
           "Online matchmaking is unstable; co-op has been unavailable for extended periods.",
           "PC port optimization is poor. Frame rate never stabilizes."
         ],
         "positive_orig": [
-          "難易度が高いが、それを乗り越えた時の達成感は他のゲームでは味わえない。ボスデザインも素晴らしい。",
+          "難易度が高いが、それを乗り越えた時の達成感は他のゲームでは味わえない。",
           "死にゲーの最高傑作。理不尽さの中にちゃんと「乗り越えられる設計」がある。",
           "ロアが深い。テキストを読み込むほど世界観にのめり込む。フロムワールドの集大成。"
+        ],
+        "neutral_orig": [
+          "戦闘は素晴らしいが，オンラインのコミュニティが荒れている。ソロなら強くおすすめ，マルチはやや微妙。",
+          "PC最適化が甘く，DLCも高額だが，ゲームデザイン自体は秀逸。7点くらいの評価。"
         ],
         "negative_orig": [
           "オンラインのマッチングが不安定で、協力プレイができない状態が続いている。",
@@ -30,15 +39,20 @@
         ]
       },
       "english": {
-        "approval_rate": 0.88, "pos_count": 180, "neg_count": 20,
+        "approval_rate": 0.88, "pos_count": 180, "neu_count": 18, "neg_count": 20,
+        "avg_playtime_review_h": 38.1,
         "positive": [
           "The pinnacle of the Souls series. Every death is a lesson.",
           "Boss design is unmatched. Nameless King alone is worth the price.",
           "Challenging but never unfair. The lore rewards patient players."
         ],
+        "neutral": [
+          "The combat is incredible, but the second half feels rushed and PvP is broken. Net result: worth it.",
+          "A masterwork in level design hampered by the worst network infrastructure in the genre."
+        ],
         "negative": [
           "PvP is ruined by hackers and lag. From Software needs to address this.",
-          "The DLC pricing feels excessive for the amount of content provided.",
+          "The DLC pricing feels excessive for the content provided.",
           "No pause button is just bad game design, not 'difficulty'."
         ],
         "positive_orig": [
@@ -46,17 +60,26 @@
           "Boss design is unmatched. Nameless King alone is worth the price.",
           "Challenging but never unfair. The lore rewards patient players."
         ],
+        "neutral_orig": [
+          "The combat is incredible, but the second half feels rushed and PvP is broken. Net result: worth it.",
+          "A masterwork in level design hampered by the worst network infrastructure in the genre."
+        ],
         "negative_orig": [
           "PvP is ruined by hackers and lag. From Software needs to address this.",
-          "The DLC pricing feels excessive for the amount of content provided.",
+          "The DLC pricing feels excessive for the content provided.",
           "No pause button is just bad game design, not 'difficulty'."
         ]
       },
       "schinese": {
-        "approval_rate": 0.82, "pos_count": 82, "neg_count": 17,
+        "approval_rate": 0.82, "pos_count": 82, "neu_count": 9, "neg_count": 17,
+        "avg_playtime_review_h": 25.4,
         "positive": [
           "Extremely high game quality, unique boss design, deeply satisfying to clear.",
           "The pinnacle of the Souls series — strongly recommended to all players who enjoy a challenge."
+        ],
+        "neutral": [
+          "Great game core, but the lack of Chinese localization and poor PC optimization drag it down significantly.",
+          "Combat is excellent. DLC pricing and online issues make it a qualified recommendation."
         ],
         "negative": [
           "No Chinese voice acting, difficult to follow the story; full localization is needed.",
@@ -67,6 +90,10 @@
           "游戏质量极高，Boss设计独特，打通之后成就感满满。",
           "这是魂系列的巅峰之作，强烈推荐给所有喜欢挑战的玩家。"
         ],
+        "neutral_orig": [
+          "游戏核心很棒，但没有中文本地化和PC优化差拉低了体验，总体来说勉强推荐。",
+          "战斗系统出色，但DLC定价和联机问题让人纠结，有条件推荐。"
+        ],
         "negative_orig": [
           "没有中文配音，剧情理解困难，希望能有完整的中文本地化。",
           "优化很差，配置达标但帧率依然不稳定，令人失望。",
@@ -74,20 +101,29 @@
         ]
       },
       "russian": {
-        "approval_rate": 0.74, "pos_count": 148, "neg_count": 52,
+        "approval_rate": 0.74, "pos_count": 148, "neu_count": 20, "neg_count": 52,
+        "avg_playtime_review_h": 30.7,
         "positive": [
           "Best game in the series. Bosses are difficult but fair.",
           "Excellent level design and atmosphere. Highly recommended."
         ],
+        "neutral": [
+          "Brilliant game underneath, but the online is dead and the DLC pricing is exploitative. Offline-only recommendation.",
+          "Would be a 10/10 if not for the hackers and absurd DLC costs. As it stands, a 7."
+        ],
         "negative": [
           "Online is dead. Hackers everywhere; FromSoft doesn't respond to reports.",
           "PC optimization is terrible. Constant FPS drops even on high-end hardware.",
-          "DLC is too expensive for the amount of content it provides.",
+          "DLC is too expensive for the content it provides.",
           "PvP is completely broken due to cheaters."
         ],
         "positive_orig": [
           "Лучшая игра серии. Боссы сложные но честные.",
           "Отличный дизайн уровней и атмосфера. Рекомендую."
+        ],
+        "neutral_orig": [
+          "Блестящая игра, но онлайн мёртв и DLC стоит неоправданно дорого. Рекомендую только офлайн.",
+          "Это была бы 10/10, если не читеры и цены на DLC. Как есть — 7 из 10."
         ],
         "negative_orig": [
           "Онлайн мертв. Хакеры везде, From не реагирует на жалобы.",
@@ -97,10 +133,15 @@
         ]
       },
       "german": {
-        "approval_rate": 0.79, "pos_count": 24, "neg_count": 6,
+        "approval_rate": 0.79, "pos_count": 24, "neu_count": 4, "neg_count": 6,
+        "avg_playtime_review_h": 45.8,
         "positive": [
           "Outstanding game design. The difficulty is fair and instructive.",
           "Best game in the series. Bosses are creative and demanding."
+        ],
+        "neutral": [
+          "Exceptional core game undermined by a dead online and overpriced DLC. Offline players get full value.",
+          "The single-player is a masterpiece; the multiplayer side is essentially abandoned."
         ],
         "negative": [
           "PC port is technically flawed. No proper frame rate control.",
@@ -111,6 +152,10 @@
           "Herausragendes Spieldesign. Die Schwierigkeit ist fair und lehrreich.",
           "Beste Spiel der Serie. Bosse sind kreativ und fordernd."
         ],
+        "neutral_orig": [
+          "Außergewöhnliches Kerngame, aber totes Online und überteuerte DLCs. Nur für Offline-Spieler empfehlenswert.",
+          "Der Singleplayer ist ein Meisterwerk; der Multiplayer ist praktisch aufgegeben."
+        ],
         "negative_orig": [
           "PC-Port ist technisch mangelhaft. Keine ordentliche Frame-Rate-Kontrolle.",
           "Online-Matchmaking funktioniert kaum noch. Schade für ein ansonsten tolles Spiel.",
@@ -118,10 +163,15 @@
         ]
       },
       "koreana": {
-        "approval_rate": 0.78, "pos_count": 28, "neg_count": 8,
+        "approval_rate": 0.78, "pos_count": 28, "neu_count": 5, "neg_count": 8,
+        "avg_playtime_review_h": 28.2,
         "positive": [
           "Best of the Souls series. Every death teaches you something.",
           "Boss design is overwhelming. Nameless King alone is worth the price."
+        ],
+        "neutral": [
+          "The game itself is brilliant, but the lack of Korean subtitles and broken PvP make it hard to fully recommend.",
+          "Excellent single-player experience; online side is essentially unplayable due to hackers."
         ],
         "negative": [
           "Too many online hackers. PvP is effectively impossible.",
@@ -132,6 +182,10 @@
           "소울 시리즈 최고의 작품. 죽을 때마다 배우는 게 있다.",
           "보스 디자인이 압도적이다. 네임리스 킹 혼자서도 값어치를 한다."
         ],
+        "neutral_orig": [
+          "게임 자체는 훌륭하지만 한국어 자막 부재와 망가진 PvP 때문에 완전히 추천하기 어렵다.",
+          "싱글플레이는 훌륭하지만 온라인은 핵 유저 때문에 사실상 불가능하다."
+        ],
         "negative_orig": [
           "온라인 핵 유저가 너무 많다. PVP는 사실상 불가능.",
           "PC 최적화가 엉망이다. 고사양에서도 프레임이 튄다.",
@@ -141,11 +195,16 @@
     },
     "stardew_valley": {
       "japanese": {
-        "approval_rate": 0.98, "pos_count": 100, "neg_count": 4,
+        "approval_rate": 0.95, "pos_count": 100, "neu_count": 8, "neg_count": 4,
+        "avg_playtime_review_h": 120.5,
         "positive": [
-          "You can play for hours. The satisfaction of growing a farm and the attachment to characters is immense.",
+          "You can play for hours. The satisfaction of growing a farm and attachment to characters is immense.",
           "The music is wonderful. Playing when tired brings genuine comfort. A masterpiece of indie gaming.",
           "Quietly farming alone is fun. The changing of seasons is truly beautiful."
+        ],
+        "neutral": [
+          "Incredibly charming but gets repetitive after year 2. Perfect for short sessions, not for marathon play.",
+          "Great concept but the multiplayer mode is severely undercooked compared to single player."
         ],
         "negative": [
           "Multiplayer has fewer features than single-player, making it hard to enjoy with friends.",
@@ -156,17 +215,26 @@
           "音楽が最高。疲れたときにやると癒される。インディーゲームの傑作。",
           "一人で黙々と農業するのが楽しい。季節の移り変わりが本当に美しい。"
         ],
+        "neutral_orig": [
+          "最初は楽しいが2年目以降に単調になってくる。短時間プレイ向けの良ゲーム。",
+          "コンセプトは最高だが，マルチプレイがシングルに比べて大きく劣る。"
+        ],
         "negative_orig": [
           "マルチプレイがシングルより機能が少なく、友達と一緒に楽しめない部分がある。",
           "後半になるとやることが少なくなってくる。エンドコンテンツが薄い。"
         ]
       },
       "english": {
-        "approval_rate": 0.95, "pos_count": 196, "neg_count": 4,
+        "approval_rate": 0.95, "pos_count": 196, "neu_count": 12, "neg_count": 4,
+        "avg_playtime_review_h": 200.3,
         "positive": [
           "Pure joy in a game. One of the most relaxing experiences ever made.",
           "A masterpiece of indie game design. The attention to detail is incredible.",
           "I've lost 500 hours and I regret nothing."
+        ],
+        "neutral": [
+          "One of the best games ever, but multiplayer is a completely unfinished afterthought.",
+          "Magical first two in-game years; third year and beyond runs out of meaningful content."
         ],
         "negative": [
           "Multiplayer feels like an afterthought. Missing many single-player features.",
@@ -177,16 +245,25 @@
           "A masterpiece of indie game design. The attention to detail is incredible.",
           "I've lost 500 hours and I regret nothing."
         ],
+        "neutral_orig": [
+          "One of the best games ever, but multiplayer is a completely unfinished afterthought.",
+          "Magical first two in-game years; third year and beyond runs out of meaningful content."
+        ],
         "negative_orig": [
           "Multiplayer feels like an afterthought. Missing many single-player features.",
           "The game crashes constantly on my setup despite meeting all requirements."
         ]
       },
       "schinese": {
-        "approval_rate": 0.93, "pos_count": 186, "neg_count": 14,
+        "approval_rate": 0.93, "pos_count": 186, "neu_count": 14, "neg_count": 14,
+        "avg_playtime_review_h": 80.2,
         "positive": [
           "An incredibly healing game — the farming life is so beautiful.",
           "The pinnacle of indie games; amazing that a single developer built this."
+        ],
+        "neutral": [
+          "Great game for the first playthrough, but the weak multiplayer and thin late-game drag the score down.",
+          "Beautiful and relaxing, but repetitive after 100+ hours. Worth the price but not for everyone."
         ],
         "negative": [
           "Multiplayer is too weak, with many restrictions when playing with friends.",
@@ -197,6 +274,10 @@
           "超级治愈的游戏，农场生活太美好了。",
           "独立游戏的巅峰，开发者一个人做出来的太厉害了。"
         ],
+        "neutral_orig": [
+          "初次游玩很棒，但联机薄弱和后期内容匮乏拉低了评分，总体算是推荐。",
+          "美丽放松，但100小时后有些重复。性价比不错，但不适合所有人。"
+        ],
         "negative_orig": [
           "联机功能太弱了，和朋友一起玩会有很多限制。",
           "后期内容有些单调，希望能有更多的扩展内容。",
@@ -204,10 +285,15 @@
         ]
       },
       "russian": {
-        "approval_rate": 0.89, "pos_count": 155, "neg_count": 19,
+        "approval_rate": 0.89, "pos_count": 155, "neu_count": 10, "neg_count": 19,
+        "avg_playtime_review_h": 60.8,
         "positive": [
           "One of the best indie games of all time. Relaxing and deeply absorbing.",
           "A great way to unwind after challenging games."
+        ],
+        "neutral": [
+          "Wonderful experience that unfortunately runs dry after a few hundred hours. A good game, not a great one long-term.",
+          "Excellent solo game, poor multiplayer. Buy it for single player only."
         ],
         "negative": [
           "Multiplayer feels raw and unfinished.",
@@ -218,6 +304,10 @@
           "Одна из лучших инди игр всех времён. Расслабляющая и затягивающая.",
           "Отличный способ отдохнуть от сложных игр."
         ],
+        "neutral_orig": [
+          "Прекрасный опыт, но после нескольких сотен часов высыхает. Хорошая игра, но не великая в долгосрочной перспективе.",
+          "Отличный соло, плохой мультиплеер. Берите только ради синглплеера."
+        ],
         "negative_orig": [
           "Мультиплеер сырой и недоработанный.",
           "После нескольких сотен часов становится скучно — мало эндгейм контента.",
@@ -225,10 +315,14 @@
         ]
       },
       "german": {
-        "approval_rate": 0.91, "pos_count": 13, "neg_count": 1,
+        "approval_rate": 0.91, "pos_count": 13, "neu_count": 2, "neg_count": 1,
+        "avg_playtime_review_h": 150.1,
         "positive": [
           "A wonderful, relaxing game. Perfect for unwinding.",
           "One of the best indie games ever made. Timeless."
+        ],
+        "neutral": [
+          "Nearly perfect game that stumbles on its multiplayer implementation. A must-play for solo; skip if you want co-op."
         ],
         "negative": [
           "Multiplayer has too many restrictions compared to single-player."
@@ -237,15 +331,23 @@
           "Wunderschönes, entspannendes Spiel. Perfekt zum Abschalten.",
           "Eines der besten Indie-Spiele überhaupt. Zeitlos."
         ],
+        "neutral_orig": [
+          "Nahezu perfektes Spiel, das beim Multiplayer strauchelt. Pflichtspiel für Solo; überspringen wenn Co-op gewünscht."
+        ],
         "negative_orig": [
           "Multiplayer hat zu viele Einschränkungen im Vergleich zum Singleplayer."
         ]
       },
       "koreana": {
-        "approval_rate": 0.92, "pos_count": 53, "neg_count": 4,
+        "approval_rate": 0.92, "pos_count": 53, "neu_count": 5, "neg_count": 4,
+        "avg_playtime_review_h": 90.7,
         "positive": [
           "The essence of healing games. Perfect when you're stressed.",
           "One of the greatest indie game works in history."
+        ],
+        "neutral": [
+          "Incredibly good for the first 100 hours, but the thin end-game and weak multiplayer prevent a full recommendation.",
+          "Solo mode is excellent; co-op mode is a clear afterthought."
         ],
         "negative": [
           "Multiplayer has fewer features than single-player, making it difficult to enjoy with friends.",
@@ -255,6 +357,10 @@
           "힐링 게임의 정수. 스트레스 받을 때 하면 최고다.",
           "인디 게임 역사상 최고의 작품 중 하나."
         ],
+        "neutral_orig": [
+          "처음 100시간은 정말 좋지만 빈약한 후반 콘텐츠와 약한 멀티플레이 때문에 완전한 추천은 어렵다.",
+          "싱글 모드는 훌륭하지만 협동 모드는 명백히 부족하다."
+        ],
         "negative_orig": [
           "멀티플레이가 싱글보다 기능이 적어서 친구와 즐기기 어렵다.",
           "후반부 콘텐츠가 빈약하다."
@@ -263,10 +369,15 @@
     },
     "cs2": {
       "japanese": {
-        "approval_rate": 0.48, "pos_count": 27, "neg_count": 29,
+        "approval_rate": 0.48, "pos_count": 27, "neu_count": 14, "neg_count": 29,
+        "avg_playtime_review_h": 180.4,
         "positive": [
           "The origin of FPS. One of the few games where you can truly feel your own improvement.",
           "The competitive scene is exciting. Watching pro matches first makes it twice as fun."
+        ],
+        "neutral": [
+          "When it works, it's the best FPS ever made. When cheaters are present, it's the worst. A 50/50 lottery.",
+          "FPS mechanics are perfect but Japan server latency and the anti-cheat situation make it a qualified recommendation."
         ],
         "negative": [
           "Too many cheaters. VAC anti-cheat is completely non-functional.",
@@ -278,6 +389,10 @@
           "FPSの原点。スキルの上達を実感できる数少ないゲーム。",
           "競技シーンが熱い。プロの試合を観てから始めると楽しさが倍増する。"
         ],
+        "neutral_orig": [
+          "チーターがいないときは史上最高のFPS。チーターがいるときは最悪。どちらになるかは運次第。",
+          "FPSの完成度は最高だが，日本サーバーのラグと反チート対策の問題で手放しで推薦できない。"
+        ],
         "negative_orig": [
           "チーターが多すぎる。VAC（不正対策）が全く機能していない。",
           "CS:GOからの劣化版。なぜわざわざ移行したのか理解できない。",
@@ -286,10 +401,15 @@
         ]
       },
       "english": {
-        "approval_rate": 0.55, "pos_count": 110, "neg_count": 90,
+        "approval_rate": 0.55, "pos_count": 110, "neu_count": 30, "neg_count": 90,
+        "avg_playtime_review_h": 1200.5,
         "positive": [
           "Still the best competitive FPS out there when it works.",
           "The gunplay is unmatched. Nothing else comes close to this skill ceiling."
+        ],
+        "neutral": [
+          "Best FPS mechanics in the genre, but the anti-cheat situation makes it a coin flip. Sometimes great, sometimes unplayable.",
+          "Upgraded from CS:GO with better graphics, but the core competitive experience has gotten worse, not better."
         ],
         "negative": [
           "Cheaters in every other game. VAC is completely useless.",
@@ -301,6 +421,10 @@
         "positive_orig": [
           "Still the best competitive FPS out there when it works.",
           "The gunplay is unmatched. Nothing else comes close to this skill ceiling."
+        ],
+        "neutral_orig": [
+          "Best FPS mechanics in the genre, but the anti-cheat situation makes it a coin flip. Sometimes great, sometimes unplayable.",
+          "Upgraded from CS:GO with better graphics, but the core competitive experience has gotten worse, not better."
         ],
         "negative_orig": [
           "Cheaters in every other game. VAC is completely useless.",
@@ -311,10 +435,15 @@
         ]
       },
       "schinese": {
-        "approval_rate": 0.61, "pos_count": 122, "neg_count": 78,
+        "approval_rate": 0.61, "pos_count": 122, "neu_count": 22, "neg_count": 78,
+        "avg_playtime_review_h": 400.1,
         "positive": [
           "The best competitive FPS, bar none.",
           "The skill ceiling is very high — extremely rewarding when you play well."
+        ],
+        "neutral": [
+          "Great competitive framework, but the cheating problem and high domestic server latency make it frustrating.",
+          "Better than CS:GO in some ways, worse in others. The anti-cheat regression is the main pain point."
         ],
         "negative": [
           "Too many cheaters; anti-cheat is effectively non-existent.",
@@ -325,6 +454,10 @@
           "最好的竞技FPS，没有之一。",
           "技术天花板很高，打得好很有成就感。"
         ],
+        "neutral_orig": [
+          "竞技框架很棒，但外挂问题和国内高延迟让人沮丧，很矛盾的游戏。",
+          "某些方面比CSGO好，某些方面更差，反作弊退步是最大的痛点。"
+        ],
         "negative_orig": [
           "外挂太多了，反作弊形同虚设。",
           "从CSGO换过来感觉变差了，优化也一般。",
@@ -332,10 +465,15 @@
         ]
       },
       "russian": {
-        "approval_rate": 0.52, "pos_count": 104, "neg_count": 96,
+        "approval_rate": 0.52, "pos_count": 104, "neu_count": 25, "neg_count": 96,
+        "avg_playtime_review_h": 850.3,
         "positive": [
           "Best tactical shooter. Skill determines everything.",
           "Despite all the problems, there are no real alternatives."
+        ],
+        "neutral": [
+          "The game has the best competitive shooter bones but the execution — especially anti-cheat — is consistently disappointing.",
+          "Would be a 10/10 if Valve fixed the cheating and server infrastructure. As it is, a reluctant 6."
         ],
         "negative": [
           "Cheaters at every turn. VAC is a dead system.",
@@ -347,6 +485,10 @@
           "Лучший тактический шутер. Навык решает всё.",
           "Несмотря на все проблемы, альтернатив нет."
         ],
+        "neutral_orig": [
+          "У игры лучшая основа для шутера, но исполнение — особенно античит — неизменно разочаровывает.",
+          "Это была бы 10/10, если бы Valve исправила читеров и серверную инфраструктуру. Пока что нехотя 6."
+        ],
         "negative_orig": [
           "Читеры на каждом шагу. VAC — мёртвая система.",
           "CS:GO был лучше по всем параметрам.",
@@ -355,10 +497,15 @@
         ]
       },
       "german": {
-        "approval_rate": 0.63, "pos_count": 126, "neg_count": 74,
+        "approval_rate": 0.63, "pos_count": 126, "neu_count": 20, "neg_count": 74,
+        "avg_playtime_review_h": 650.2,
         "positive": [
           "Best competitive shooter on the market.",
           "High skill curve, fair mechanics when there are no cheaters involved."
+        ],
+        "neutral": [
+          "Undeniably the best shooter mechanics, but Valve's refusal to fix cheating makes it a frustrating experience.",
+          "The upgrade from CS:GO is real in some areas; nonexistent in others. Mixed feelings."
         ],
         "negative": [
           "The cheating problem is intolerable. Valve does nothing about it.",
@@ -369,6 +516,10 @@
           "Bester kompetitiver Shooter am Markt.",
           "Hohe Skill-Kurve, faire Mechaniken wenn keine Cheater dabei sind."
         ],
+        "neutral_orig": [
+          "Unbestreitbar die besten Shooter-Mechaniken, aber Valves Weigerung, Cheating zu bekämpfen, macht es frustrierend.",
+          "Das Upgrade von CS:GO ist in manchen Bereichen real; in anderen inexistent. Gemischte Gefühle."
+        ],
         "negative_orig": [
           "Cheat-Problem ist unerträglich. Valve tut nichts dagegen.",
           "CS:GO war technisch besser. Downgrade in vielen Bereichen.",
@@ -376,10 +527,15 @@
         ]
       },
       "koreana": {
-        "approval_rate": 0.58, "pos_count": 116, "neg_count": 84,
+        "approval_rate": 0.58, "pos_count": 116, "neu_count": 18, "neg_count": 84,
+        "avg_playtime_review_h": 500.6,
         "positive": [
           "The best competitive FPS. Skill directly translates to results.",
           "The esports scene is alive, making spectating enjoyable too."
+        ],
+        "neutral": [
+          "The FPS framework is perfect, but the Korean server lag and hacker problem make it a love/hate relationship.",
+          "Better art direction than CS:GO; worse everything else. A game with enormous potential squandered."
         ],
         "negative": [
           "Way too many hackers. VAC is completely dead.",
@@ -390,6 +546,10 @@
           "최고의 경쟁 FPS. 실력이 곧 결과로 이어진다.",
           "e스포츠 씬이 살아있어서 관전도 재미있다."
         ],
+        "neutral_orig": [
+          "FPS 프레임워크는 완벽하지만 한국 서버 렉과 핵 문제 때문에 사랑과 증오의 관계다.",
+          "아트 디렉션은 CS:GO보다 낫지만 나머지는 모두 더 나쁘다. 잠재력을 낭비한 게임."
+        ],
         "negative_orig": [
           "핵 유저가 너무 많다. VAC는 완전히 죽었다.",
           "CS:GO가 더 나았다. 퇴보한 느낌이다.",
@@ -399,10 +559,15 @@
     },
     "cyberpunk": {
       "japanese": {
-        "approval_rate": 0.88, "pos_count": 100, "neg_count": 14,
+        "approval_rate": 0.88, "pos_count": 100, "neu_count": 12, "neg_count": 14,
+        "avg_playtime_review_h": 45.3,
         "positive": [
           "Completely reborn with the 2.0 update. Now it's the finest RPG I can recommend.",
           "The world and story are overwhelming. Night City feels like a place you genuinely inhabit."
+        ],
+        "neutral": [
+          "2.0 fixed the technical issues but Night City's RPG systems remain shallow. Stunning world, mediocre RPG.",
+          "Cautiously recommend post-2.0. Can't fully forgive the launch state, but the current game is genuinely good."
         ],
         "negative": [
           "Cannot forgive the state it was sold in at launch. It amounted to false advertising.",
@@ -412,17 +577,26 @@
           "2.0アップデートで完全に生まれ変わった。今ならおすすめできる最高のRPG。",
           "世界観とストーリーが圧倒的。ナイトシティに本当に生きている感覚がある。"
         ],
+        "neutral_orig": [
+          "2.0で技術的な問題は解決されたが，RPGシステムは依然として薄い。世界観は最高，RPGとして普通。",
+          "2.0後は条件付きで推薦できる。発売時を許せないが，今のゲームは確かに良い。"
+        ],
         "negative_orig": [
           "発売当初の状態で販売したことは許せない。詐欺的な販売方法だった。",
           "DLCが高額すぎる。本編と合わせると財布に痛い。"
         ]
       },
       "english": {
-        "approval_rate": 0.79, "pos_count": 158, "neg_count": 42,
+        "approval_rate": 0.79, "pos_count": 158, "neu_count": 20, "neg_count": 42,
+        "avg_playtime_review_h": 35.7,
         "positive": [
           "After all the patches, this is one of the best RPGs ever made.",
           "Night City is the most detailed open world I've ever experienced.",
           "Phantom Liberty is an incredible DLC. Best story content in years."
+        ],
+        "neutral": [
+          "The game is much better post-2.0 but I can't forget the launch disaster. Cautious recommend.",
+          "Stunning world, mediocre RPG mechanics. Great game if you go in with adjusted expectations."
         ],
         "negative": [
           "Should never have been released in its launch state. Still bitter.",
@@ -435,6 +609,10 @@
           "Night City is the most detailed open world I've ever experienced.",
           "Phantom Liberty is an incredible DLC. Best story content in years."
         ],
+        "neutral_orig": [
+          "The game is much better post-2.0 but I can't forget the launch disaster. Cautious recommend.",
+          "Stunning world, mediocre RPG mechanics. Great game if you go in with adjusted expectations."
+        ],
         "negative_orig": [
           "Should never have been released in its launch state. Still bitter.",
           "The police system is still a joke even after all the updates.",
@@ -443,10 +621,15 @@
         ]
       },
       "schinese": {
-        "approval_rate": 0.76, "pos_count": 152, "neg_count": 48,
+        "approval_rate": 0.76, "pos_count": 152, "neu_count": 18, "neg_count": 48,
+        "avg_playtime_review_h": 30.4,
         "positive": [
           "Completely transformed after the 2.0 update — now it's a genuinely great game.",
           "The details of Night City are breathtaking; the immersion is extraordinary."
+        ],
+        "neutral": [
+          "2.0 made it playable and even good, but the launch deception and shallow RPG systems prevent a full recommendation.",
+          "Beautiful open world, disappointing RPG depth. Worth playing with appropriate expectations."
         ],
         "negative": [
           "The launch state was a betrayal of players; it should not be forgiven.",
@@ -457,6 +640,10 @@
           "2.0更新之后脱胎换骨，现在是真正的好游戏了。",
           "夜之城的细节令人叹为观止，沉浸感极强。"
         ],
+        "neutral_orig": [
+          "2.0让游戏变得可玩甚至很好，但发售时的欺骗和浅薄的RPG系统阻止了完全推荐。",
+          "美丽的开放世界，令人失望的RPG深度，以适当的期望值游玩是值得的。"
+        ],
         "negative_orig": [
           "发售时的状态是对玩家的欺骗，不应该原谅。",
           "DLC定价太贵，对中国玩家不友好。",
@@ -464,10 +651,15 @@
         ]
       },
       "russian": {
-        "approval_rate": 0.71, "pos_count": 142, "neg_count": 58,
+        "approval_rate": 0.71, "pos_count": 142, "neu_count": 16, "neg_count": 58,
+        "avg_playtime_review_h": 25.9,
         "positive": [
           "After update 2.0 — a masterpiece. The best open world available.",
           "Night City is a genuine work of art."
+        ],
+        "neutral": [
+          "The 2.0 update redeemed most technical issues, but CDPR's trust deficit and the hollow RPG core remain problems.",
+          "A beautiful world with a mediocre RPG skeleton. Play it for the aesthetics; don't expect deep systems."
         ],
         "negative": [
           "The launch was a catastrophe. Still have not forgiven CDPR.",
@@ -479,6 +671,10 @@
           "После обновления 2.0 — шедевр. Лучший открытый мир.",
           "Найт-Сити — это произведение искусства."
         ],
+        "neutral_orig": [
+          "Обновление 2.0 исправило большинство технических проблем, но дефицит доверия к CDPR и пустой RPG-скелет остаются.",
+          "Красивый мир с посредственным RPG-скелетом. Играйте ради эстетики; не ждите глубоких систем."
+        ],
         "negative_orig": [
           "Релиз был катастрофой. До сих пор не простил CDPR.",
           "Обещали одно — дали другое. Маркетинговая ложь.",
@@ -487,10 +683,15 @@
         ]
       },
       "german": {
-        "approval_rate": 0.74, "pos_count": 67, "neg_count": 23,
+        "approval_rate": 0.74, "pos_count": 67, "neu_count": 10, "neg_count": 23,
+        "avg_playtime_review_h": 40.6,
         "positive": [
           "After Patch 2.0, finally the game that was promised.",
           "Night City is technically impressive and atmospherically dense."
+        ],
+        "neutral": [
+          "2.0 delivered on most promises, but the launch remains a scandal and the RPG systems are disappointingly thin.",
+          "Stunning presentation; hollow RPG depth. Worth it with lowered expectations."
         ],
         "negative": [
           "The launch state was a scandal — outright consumer deception.",
@@ -501,6 +702,10 @@
           "Nach Patch 2.0 endlich das Spiel, das versprochen wurde.",
           "Night City ist technisch beeindruckend und atmosphärisch dicht."
         ],
+        "neutral_orig": [
+          "2.0 hat die meisten Versprechen eingelöst, aber der Launch bleibt ein Skandal und die RPG-Systeme sind enttäuschend flach.",
+          "Atemberaubende Präsentation; hohle RPG-Tiefe. Mit reduzierten Erwartungen lohnenswert."
+        ],
         "negative_orig": [
           "Der Launch-Zustand war ein Skandal. Verbrauchertäuschung.",
           "Für deutsche Verhältnisse war das fast schon strafrechtlich relevant.",
@@ -508,10 +713,15 @@
         ]
       },
       "koreana": {
-        "approval_rate": 0.72, "pos_count": 72, "neg_count": 28,
+        "approval_rate": 0.72, "pos_count": 72, "neu_count": 12, "neg_count": 28,
+        "avg_playtime_review_h": 32.4,
         "positive": [
           "Completely changed after the 2.0 update. Now highly recommended.",
           "The details of Night City are overwhelming."
+        ],
+        "neutral": [
+          "2.0 is a massive improvement, but the launch scandal and RPG shallowness keep it from a full recommendation.",
+          "Beautiful world, disappointing RPG systems. Worth playing post-2.0 with appropriate expectations."
         ],
         "negative": [
           "The launch state is unacceptable. Still angry about it.",
@@ -522,6 +732,10 @@
           "2.0 업데이트 후 완전히 달라졌다. 지금은 강력 추천.",
           "나이트 시티의 디테일이 압도적이다."
         ],
+        "neutral_orig": [
+          "2.0은 큰 개선이지만 출시 스캔들과 얕은 RPG 시스템 때문에 완전한 추천은 어렵다.",
+          "아름다운 세계관, 실망스러운 RPG 시스템. 2.0 이후 적절한 기대치로 플레이할 만하다."
+        ],
         "negative_orig": [
           "출시 당시 상태는 용납할 수 없다. 아직도 화가 난다.",
           "약속한 것과 실제가 너무 달랐다.",
@@ -531,10 +745,15 @@
     },
     "minecraft": {
       "japanese": {
-        "approval_rate": 0.67, "pos_count": 14, "neg_count": 7,
+        "approval_rate": 0.67, "pos_count": 14, "neu_count": 5, "neg_count": 7,
+        "avg_playtime_review_h": 250.2,
         "positive": [
           "A wellspring of creativity. The joy of building your own world is unparalleled.",
           "A unique game that can be enjoyed by children and adults alike."
+        ],
+        "neutral": [
+          "Classic game that everyone should experience, but the Steam version is objectively inferior to Java edition. Mixed recommendation.",
+          "Microsoft's monetization creep is concerning, but the core creativity remains unmatched. Play with caution."
         ],
         "negative": [
           "The Steam version has functional gaps versus the Java edition — mods are much harder to use.",
@@ -544,16 +763,25 @@
           "創造性の塊。自分だけの世界を作る喜びはほかにない。",
           "子供から大人まで楽しめる唯一無二のゲーム。"
         ],
+        "neutral_orig": [
+          "誰もが体験すべきクラシックだが，Steam版はJava版に客観的に劣る。条件付き推薦。",
+          "MicrosoftのDLC商法が気になるが，コアのクリエイティビティは今でも最高。注意して買おう。"
+        ],
         "negative_orig": [
           "Steam版はJava版と機能差があり、MODが使いにくい。",
           "価格が高い。セールをほとんどやらないのが不満。"
         ]
       },
       "english": {
-        "approval_rate": 0.72, "pos_count": 66, "neg_count": 26,
+        "approval_rate": 0.72, "pos_count": 66, "neu_count": 12, "neg_count": 26,
+        "avg_playtime_review_h": 800.5,
         "positive": [
           "The greatest sandbox game ever made. Infinite creativity.",
           "I've played this for 10 years and I'm still finding new things."
+        ],
+        "neutral": [
+          "Classic game that everyone should try, but the Steam version is objectively inferior to Java edition. Buy it elsewhere if you want mods.",
+          "Timeless creativity but Microsoft's monetization creep is concerning. Core game still good; the ecosystem around it worrying."
         ],
         "negative": [
           "The Steam version is inferior to the Java edition. Why even bother?",
@@ -565,6 +793,10 @@
           "The greatest sandbox game ever made. Infinite creativity.",
           "I've played this for 10 years and I'm still finding new things."
         ],
+        "neutral_orig": [
+          "Classic game that everyone should try, but the Steam version is objectively inferior to Java edition. Buy it elsewhere if you want mods.",
+          "Timeless creativity but Microsoft's monetization creep is concerning. Core game still good; the ecosystem around it worrying."
+        ],
         "negative_orig": [
           "The Steam version is inferior to the Java edition. Why even bother?",
           "Microsoft's monetization of this game is getting out of hand.",
@@ -573,10 +805,15 @@
         ]
       },
       "schinese": {
-        "approval_rate": 0.68, "pos_count": 42, "neg_count": 19,
+        "approval_rate": 0.68, "pos_count": 42, "neu_count": 8, "neg_count": 19,
+        "avg_playtime_review_h": 150.3,
         "positive": [
           "A game of infinite creativity — still playing after ten years.",
           "Suitable for all ages; a truly universal game."
+        ],
+        "neutral": [
+          "Core game is timeless, but the Steam version's mod limitations and Microsoft's aggressive monetization are real problems.",
+          "Great game if you accept its limitations. The Java version is objectively superior for serious players."
         ],
         "negative": [
           "Steam version doesn't support mods, far inferior to Java edition.",
@@ -587,6 +824,10 @@
           "创造力无限的游戏，玩了十年还在玩。",
           "适合所有年龄段，是真正意义上的全民游戏。"
         ],
+        "neutral_orig": [
+          "核心游戏是永恒的，但Steam版的Mod限制和微软积极的商业化是真正的问题。",
+          "接受其局限性就是好游戏。Java版对认真玩家来说明显更优越。"
+        ],
         "negative_orig": [
           "Steam版不支持Mod，比Java版差太多了。",
           "微软收购后越来越商业化，令人失望。",
@@ -594,10 +835,15 @@
         ]
       },
       "russian": {
-        "approval_rate": 0.65, "pos_count": 65, "neg_count": 35,
+        "approval_rate": 0.65, "pos_count": 65, "neu_count": 10, "neg_count": 35,
+        "avg_playtime_review_h": 300.8,
         "positive": [
           "The best sandbox in history. Boundless creativity.",
           "Been playing for 12 years — still not bored."
+        ],
+        "neutral": [
+          "The game itself is a timeless classic; the Steam version and Microsoft's monetization strategy undermine the value.",
+          "Incredible game core, but buying on Steam specifically is a mistake when Java edition exists."
         ],
         "negative": [
           "Steam version is worse than Java Edition in every way.",
@@ -609,6 +855,10 @@
           "Лучший sandbox в истории. Безграничное творчество.",
           "Играю уже 12 лет — и не надоедает."
         ],
+        "neutral_orig": [
+          "Сама игра — вечная классика; Steam-версия и стратегия монетизации Microsoft подрывают ценность.",
+          "Невероятная игровая основа, но покупать именно на Steam — ошибка, когда существует Java-издание."
+        ],
         "negative_orig": [
           "Steam-версия хуже Java Edition во всём.",
           "Microsoft превращает игру в магазин микротранзакций.",
@@ -617,10 +867,15 @@
         ]
       },
       "german": {
-        "approval_rate": 0.75, "pos_count": 75, "neg_count": 7,
+        "approval_rate": 0.75, "pos_count": 75, "neu_count": 8, "neg_count": 7,
+        "avg_playtime_review_h": 400.4,
         "positive": [
           "The most creative game of all time. Suitable for all age groups.",
           "Kids love it, adults too. A timeless masterpiece."
+        ],
+        "neutral": [
+          "Undeniably great game, but the Steam version's mod restrictions and Microsoft's monetization make it a conditional recommendation.",
+          "Buy the Java edition if you want the full experience. Steam version is a lesser product."
         ],
         "negative": [
           "Steam version does not support mods. That is the core of Minecraft.",
@@ -630,16 +885,25 @@
           "Das kreativste Spiel aller Zeiten. Für alle Altersgruppen geeignet.",
           "Kinder lieben es, Erwachsene auch. Zeitloses Meisterwerk."
         ],
+        "neutral_orig": [
+          "Unbestreitbar großartiges Spiel, aber die Mod-Einschränkungen der Steam-Version und Microsofts Monetarisierung machen es zu einer bedingten Empfehlung.",
+          "Kaufen Sie die Java-Edition für das vollständige Erlebnis. Die Steam-Version ist ein minderwertiges Produkt."
+        ],
         "negative_orig": [
           "Steam-Version unterstützt keine Mods. Das ist das Herzstück von Minecraft.",
           "Microsoft monetarisiert zu aggressiv."
         ]
       },
       "koreana": {
-        "approval_rate": 0.55, "pos_count": 11, "neg_count": 8,
+        "approval_rate": 0.55, "pos_count": 11, "neu_count": 5, "neg_count": 8,
+        "avg_playtime_review_h": 200.1,
         "positive": [
           "The pinnacle of creativity. Enjoyable for all age groups.",
           "Still not bored after more than 10 years."
+        ],
+        "neutral": [
+          "Timeless game, but the Steam version's limitations and Microsoft's monetization make a full recommendation difficult.",
+          "Great core game, but Java edition is clearly superior. Buy it there unless you have a reason for Steam."
         ],
         "negative": [
           "Steam version has far fewer features than Java edition.",
@@ -649,6 +913,10 @@
         "positive_orig": [
           "창의력의 끝판왕. 모든 연령대가 즐길 수 있다.",
           "10년 넘게 하는데도 질리지 않는다."
+        ],
+        "neutral_orig": [
+          "시대를 초월한 게임이지만 Steam 버전의 제한과 마이크로소프트의 수익화 때문에 완전한 추천이 어렵다.",
+          "훌륭한 핵심 게임이지만 Java 에디션이 명확히 우월하다. 이유가 없으면 거기서 구매하라."
         ],
         "negative_orig": [
           "Steam 버전은 Java 에디션보다 기능이 훨씬 부족하다.",

@@ -238,14 +238,15 @@ def translate_file(
     # DataFrame 構築・保存
     rows = [
         {
-            "game":              game,
-            "language":          language,
-            "review_type":       review_type,
-            "review_text_en":    en,
-            "review_text_orig":  orig,
-            "voted_up":          r.get("voted_up"),
-            "playtime_forever":  r.get("author", {}).get("playtime_forever", 0),
-            "timestamp_created": r.get("timestamp_created"),
+            "game":                 game,
+            "language":             language,
+            "review_type":          review_type,
+            "review_text_en":       en,
+            "review_text_orig":     orig,
+            "voted_up":             r.get("voted_up"),
+            "playtime_forever":     r.get("author", {}).get("playtime_forever", 0),
+            "playtime_at_review":   r.get("author", {}).get("playtime_at_review", 0),
+            "timestamp_created":    r.get("timestamp_created"),
         }
         for r, orig, en in zip(valid_reviews, texts_orig, texts_en)
     ]
