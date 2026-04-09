@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam Review Culture Dashboard</title>
+  <style>
+    /* ─── リセット・ベース ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f1117;
+      color: #e8eaf0;
+      min-height: 100vh;
+      padding: 32px 24px 64px;
+    }
+
+    /* ─── ヘッダー ────────────────────────────────────────── */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    header h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+    header p {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: #7a8499;
+    }
+
+    /* ─── ゲームセレクター ────────────────────────────────── */
+    .game-selector {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .game-btn {
+      background: #1c2030;
+      border: 1.5px solid #2a3047;
+      color: #9aa3b8;
+      padding: 9px 20px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .game-btn:hover { border-color: #4a6cf7; color: #c8d0e8; }
+    .game-btn.active {
+      background: #4a6cf7;
+      border-color: #4a6cf7;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* ─── 言語カードグリッド ──────────────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      max-width: 860px;
+      margin: 0 auto 40px;
+    }
+    @media (max-width: 620px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ─── 言語カード ──────────────────────────────────────── */
+    .lang-card {
+      border-radius: 18px;
+      padding: 22px 20px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid transparent;
+      user-select: none;
+    }
+    .lang-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.06);
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .lang-card:hover { transform: translateY(-3px); }
+    .lang-card:hover::before { opacity: 1; }
+    .lang-card.selected {
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.12);
+    }
+
+    .lang-card .flag  { font-size: 2rem; line-height: 1; margin-bottom: 10px; }
+    .lang-card .name  {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 12px;
+    }
+    .lang-card .rate  {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .lang-card .counts {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.65);
+      display: flex;
+      gap: 8px;
+    }
+    .count-pos { color: rgba(160,230,200,0.9); }
+    .count-neg { color: rgba(255,180,160,0.9); }
+
+    /* ─── クリックヒント ─────────────────────────────────── */
+    .lang-card .hint {
+      position: absolute;
+      bottom: 10px;
+      right: 14px;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ─── レビューパネル ──────────────────────────────────── */
+    .review-panel {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #161b2e;
+      border-radius: 20px;
+      border: 1.5px solid #2a3047;
+      overflow: hidden;
+      display: none;
+    }
+    .review-panel.visible { display: block; animation: fadeIn 0.2s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid #2a3047;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .panel-header .flag { font-size: 1.4rem; }
+    .panel-header h2   { font-size: 1rem; font-weight: 600; }
+    .panel-close {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: #7a8499;
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 2px 6px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .panel-close:hover { background: #2a3047; color: #e8eaf0; }
+
+    .panel-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    @media (max-width: 600px) {
+      .panel-columns { grid-template-columns: 1fr; }
+    }
+
+    .col-pos, .col-neg {
+      padding: 20px;
+      max-height: 480px;
+      overflow-y: auto;
+    }
+    .col-pos { border-right: 1px solid #2a3047; }
+
+    .col-heading {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .col-pos .col-heading { color: #4ade80; }
+    .col-neg .col-heading { color: #f87171; }
+
+    .review-item {
+      background: #1c2030;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: #c8d0e8;
+      border-left: 3px solid transparent;
+    }
+    .col-pos .review-item { border-left-color: #4ade8066; }
+    .col-neg .review-item { border-left-color: #f8717166; }
+
+    .no-reviews {
+      color: #7a8499;
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 32px 0;
+    }
+
+    /* ─── スクロールバー ──────────────────────────────────── */
+    .col-pos::-webkit-scrollbar,
+    .col-neg::-webkit-scrollbar { width: 5px; }
+    .col-pos::-webkit-scrollbar-track,
+    .col-neg::-webkit-scrollbar-track { background: transparent; }
+    .col-pos::-webkit-scrollbar-thumb,
+    .col-neg::-webkit-scrollbar-thumb { background: #2a3047; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Steam Review Culture Dashboard</h1>
+  <p>言語圏ごとのレビュー傾向を比較する — 青＝好意的 / 赤＝批判的</p>
+</header>
+
+<div class="game-selector" id="gameSelector"></div>
+<div class="cards-grid"    id="cardsGrid"></div>
+<div class="review-panel"  id="reviewPanel">
+  <div class="panel-header">
+    <span class="flag" id="panelFlag"></span>
+    <h2 id="panelTitle"></h2>
+    <button class="panel-close" id="panelClose">×</button>
+  </div>
+  <div class="panel-columns">
+    <div class="col-pos">
+      <div class="col-heading">▲ ポジティブ</div>
+      <div id="posReviews"></div>
+    </div>
+    <div class="col-neg">
+      <div class="col-heading">▼ ネガティブ</div>
+      <div id="negReviews"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ─── 言語設定 ───────────────────────────────────────────
+  const LANGS = {
+    japanese: { label: "日本",          flag: "🇯🇵" },
+    english:  { label: "英語圏",        flag: "🇺🇸" },
+    schinese: { label: "中国（簡体字）", flag: "🇨🇳" },
+    russian:  { label: "ロシア・東欧",  flag: "🇷🇺" },
+    german:   { label: "ドイツ・欧州",  flag: "🇩🇪" },
+    koreana:  { label: "韓国",          flag: "🇰🇷" },
+  };
+
+  // ─── 好意率 → カード背景色 ──────────────────────────────
+  function rateToColor(rate) {
+    // 0.0 = 赤 (hsl 0) → 0.5 = オレンジ (hsl 25) → 1.0 = 青 (hsl 215)
+    const hue = rate < 0.5
+      ? rate * 2 * 25          // 0〜25
+      : 25 + (rate - 0.5) * 2 * 190; // 25〜215
+    const sat   = 65 + rate * 15;
+    const light = 28 + rate * 10;
+    return `hsl(${hue.toFixed(0)}, ${sat.toFixed(0)}%, ${light.toFixed(0)}%)`;
+  }
+
+  // ─── データ読み込み & 初期化 ─────────────────────────────
+  let data = null;
+  let currentGame = null;
+  let selectedLang = null;
+
+  fetch('data/mock.json')
+    .then(r => r.json())
+    .then(json => {
+      data = json;
+      initGameSelector();
+      selectGame(data.games[0].id);
+    })
+    .catch(err => {
+      document.body.innerHTML += `<p style="color:#f87171;text-align:center">データ読み込みエラー: ${err}</p>`;
+    });
+
+  // ─── ゲームセレクター ────────────────────────────────────
+  function initGameSelector() {
+    const sel = document.getElementById('gameSelector');
+    data.games.forEach(g => {
+      const btn = document.createElement('button');
+      btn.className = 'game-btn';
+      btn.textContent = g.title;
+      btn.dataset.id = g.id;
+      btn.addEventListener('click', () => selectGame(g.id));
+      sel.appendChild(btn);
+    });
+  }
+
+  function selectGame(gameId) {
+    currentGame = gameId;
+    selectedLang = null;
+
+    // ボタンのアクティブ状態
+    document.querySelectorAll('.game-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.id === gameId);
+    });
+
+    renderCards(gameId);
+    closePanel();
+  }
+
+  // ─── カードレンダリング ──────────────────────────────────
+  function renderCards(gameId) {
+    const grid = document.getElementById('cardsGrid');
+    grid.innerHTML = '';
+
+    const gameData = data.reviews[gameId];
+
+    Object.entries(LANGS).forEach(([langKey, langInfo]) => {
+      const d = gameData[langKey];
+      if (!d) return;
+
+      const rate    = d.approval_rate;
+      const bgColor = rateToColor(rate);
+      const pct     = Math.round(rate * 100);
+
+      const card = document.createElement('div');
+      card.className = 'lang-card';
+      card.dataset.lang = langKey;
+      card.style.background = bgColor;
+      card.innerHTML = `
+        <div class="flag">${langInfo.flag}</div>
+        <div class="name">${langInfo.label}</div>
+        <div class="rate">${pct}%</div>
+        <div class="counts">
+          <span class="count-pos">▲ ${d.pos_count}</span>
+          <span class="count-neg">▼ ${d.neg_count}</span>
+        </div>
+        <div class="hint">クリックで詳細</div>
+      `;
+      card.addEventListener('click', () => openPanel(gameId, langKey));
+      grid.appendChild(card);
+    });
+  }
+
+  // ─── パネル開閉 ─────────────────────────────────────────
+  function openPanel(gameId, langKey) {
+    selectedLang = langKey;
+
+    // カード選択状態の更新
+    document.querySelectorAll('.lang-card').forEach(c => {
+      c.classList.toggle('selected', c.dataset.lang === langKey);
+    });
+
+    const d        = data.reviews[gameId][langKey];
+    const langInfo = LANGS[langKey];
+
+    document.getElementById('panelFlag').textContent  = langInfo.flag;
+    document.getElementById('panelTitle').textContent =
+      `${langInfo.label} — ${data.games.find(g => g.id === gameId).title}`;
+
+    renderReviews('posReviews', d.positive);
+    renderReviews('negReviews', d.negative);
+
+    const panel = document.getElementById('reviewPanel');
+    panel.classList.add('visible');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function closePanel() {
+    document.getElementById('reviewPanel').classList.remove('visible');
+    document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('selected'));
+  }
+
+  document.getElementById('panelClose').addEventListener('click', closePanel);
+
+  function renderReviews(containerId, reviews) {
+    const el = document.getElementById(containerId);
+    el.innerHTML = '';
+    if (!reviews || reviews.length === 0) {
+      el.innerHTML = '<div class="no-reviews">レビューなし</div>';
+      return;
+    }
+    reviews.forEach(text => {
+      const item = document.createElement('div');
+      item.className = 'review-item';
+      item.textContent = text;
+      el.appendChild(item);
+    });
+  }
+</script>
+</body>
+</html>
