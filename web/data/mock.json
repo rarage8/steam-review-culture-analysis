@@ -8,14 +8,23 @@
   ],
   "reviews": {
     "dark_souls_3": {
-      "japanese":  {
+      "japanese": {
         "approval_rate": 0.96, "pos_count": 99, "neg_count": 4,
         "positive": [
+          "High difficulty, but the sense of achievement when you overcome it is unlike anything else. Boss design is wonderful.",
+          "The pinnacle of Souls-like games. Within the apparent unfairness lies a design you can genuinely overcome.",
+          "The lore is deep. The more you read, the more you get absorbed into the world. The culmination of FromSoft's universe."
+        ],
+        "negative": [
+          "Online matchmaking is unstable; co-op has been unavailable for extended periods.",
+          "PC port optimization is poor. Frame rate never stabilizes."
+        ],
+        "positive_orig": [
           "難易度が高いが、それを乗り越えた時の達成感は他のゲームでは味わえない。ボスデザインも素晴らしい。",
           "死にゲーの最高傑作。理不尽さの中にちゃんと「乗り越えられる設計」がある。",
           "ロアが深い。テキストを読み込むほど世界観にのめり込む。フロムワールドの集大成。"
         ],
-        "negative": [
+        "negative_orig": [
           "オンラインのマッチングが不安定で、協力プレイができない状態が続いている。",
           "PCポートの最適化が甘い。フレームレートが安定しない。"
         ]
@@ -23,11 +32,21 @@
       "english": {
         "approval_rate": 0.88, "pos_count": 180, "neg_count": 20,
         "positive": [
-          "The pinnacle of the souls series. Every death is a lesson.",
+          "The pinnacle of the Souls series. Every death is a lesson.",
           "Boss design is unmatched. Nameless King alone is worth the price.",
           "Challenging but never unfair. The lore rewards patient players."
         ],
         "negative": [
+          "PvP is ruined by hackers and lag. From Software needs to address this.",
+          "The DLC pricing feels excessive for the amount of content provided.",
+          "No pause button is just bad game design, not 'difficulty'."
+        ],
+        "positive_orig": [
+          "The pinnacle of the Souls series. Every death is a lesson.",
+          "Boss design is unmatched. Nameless King alone is worth the price.",
+          "Challenging but never unfair. The lore rewards patient players."
+        ],
+        "negative_orig": [
           "PvP is ruined by hackers and lag. From Software needs to address this.",
           "The DLC pricing feels excessive for the amount of content provided.",
           "No pause button is just bad game design, not 'difficulty'."
@@ -36,10 +55,19 @@
       "schinese": {
         "approval_rate": 0.82, "pos_count": 82, "neg_count": 17,
         "positive": [
+          "Extremely high game quality, unique boss design, deeply satisfying to clear.",
+          "The pinnacle of the Souls series — strongly recommended to all players who enjoy a challenge."
+        ],
+        "negative": [
+          "No Chinese voice acting, difficult to follow the story; full localization is needed.",
+          "Poor optimization — frame rate unstable despite meeting system requirements.",
+          "Online system is outdated, matchmaking is painful, PvP experience is terrible."
+        ],
+        "positive_orig": [
           "游戏质量极高，Boss设计独特，打通之后成就感满满。",
           "这是魂系列的巅峰之作，强烈推荐给所有喜欢挑战的玩家。"
         ],
-        "negative": [
+        "negative_orig": [
           "没有中文配音，剧情理解困难，希望能有完整的中文本地化。",
           "优化很差，配置达标但帧率依然不稳定，令人失望。",
           "联机系统太落后了，匹配困难，PVP体验极差。"
@@ -48,10 +76,20 @@
       "russian": {
         "approval_rate": 0.74, "pos_count": 148, "neg_count": 52,
         "positive": [
+          "Best game in the series. Bosses are difficult but fair.",
+          "Excellent level design and atmosphere. Highly recommended."
+        ],
+        "negative": [
+          "Online is dead. Hackers everywhere; FromSoft doesn't respond to reports.",
+          "PC optimization is terrible. Constant FPS drops even on high-end hardware.",
+          "DLC is too expensive for the amount of content it provides.",
+          "PvP is completely broken due to cheaters."
+        ],
+        "positive_orig": [
           "Лучшая игра серии. Боссы сложные но честные.",
           "Отличный дизайн уровней и атмосфера. Рекомендую."
         ],
-        "negative": [
+        "negative_orig": [
           "Онлайн мертв. Хакеры везде, From не реагирует на жалобы.",
           "Оптимизация на PC ужасная. Постоянные просадки FPS даже на топовом железе.",
           "DLC слишком дорогие для такого количества контента.",
@@ -61,10 +99,19 @@
       "german": {
         "approval_rate": 0.79, "pos_count": 24, "neg_count": 6,
         "positive": [
+          "Outstanding game design. The difficulty is fair and instructive.",
+          "Best game in the series. Bosses are creative and demanding."
+        ],
+        "negative": [
+          "PC port is technically flawed. No proper frame rate control.",
+          "Online matchmaking barely works anymore. A shame for an otherwise great game.",
+          "No pause button is simply unacceptable for solo players."
+        ],
+        "positive_orig": [
           "Herausragendes Spieldesign. Die Schwierigkeit ist fair und lehrreich.",
           "Beste Spiel der Serie. Bosse sind kreativ und fordernd."
         ],
-        "negative": [
+        "negative_orig": [
           "PC-Port ist technisch mangelhaft. Keine ordentliche Frame-Rate-Kontrolle.",
           "Online-Matchmaking funktioniert kaum noch. Schade für ein ansonsten tolles Spiel.",
           "Kein Pause-Knopf ist für Solo-Spieler schlicht unzumutbar."
@@ -73,10 +120,19 @@
       "koreana": {
         "approval_rate": 0.78, "pos_count": 28, "neg_count": 8,
         "positive": [
+          "Best of the Souls series. Every death teaches you something.",
+          "Boss design is overwhelming. Nameless King alone is worth the price."
+        ],
+        "negative": [
+          "Too many online hackers. PvP is effectively impossible.",
+          "PC optimization is terrible. Frame spikes even on high-end hardware.",
+          "No Korean subtitles — difficult to follow the story."
+        ],
+        "positive_orig": [
           "소울 시리즈 최고의 작품. 죽을 때마다 배우는 게 있다.",
           "보스 디자인이 압도적이다. 네임리스 킹 혼자서도 값어치를 한다."
         ],
-        "negative": [
+        "negative_orig": [
           "온라인 핵 유저가 너무 많다. PVP는 사실상 불가능.",
           "PC 최적화가 엉망이다. 고사양에서도 프레임이 튄다.",
           "한국어 자막이 없어 스토리 이해가 어렵다."
@@ -84,14 +140,23 @@
       }
     },
     "stardew_valley": {
-      "japanese":  {
+      "japanese": {
         "approval_rate": 0.98, "pos_count": 100, "neg_count": 4,
         "positive": [
+          "You can play for hours. The satisfaction of growing a farm and the attachment to characters is immense.",
+          "The music is wonderful. Playing when tired brings genuine comfort. A masterpiece of indie gaming.",
+          "Quietly farming alone is fun. The changing of seasons is truly beautiful."
+        ],
+        "negative": [
+          "Multiplayer has fewer features than single-player, making it hard to enjoy with friends.",
+          "Progress slows in later stages. End-game content is thin."
+        ],
+        "positive_orig": [
           "何時間でもやれる。農場を育てる満足感とキャラクターへの愛着がすごい。",
           "音楽が最高。疲れたときにやると癒される。インディーゲームの傑作。",
           "一人で黙々と農業するのが楽しい。季節の移り変わりが本当に美しい。"
         ],
-        "negative": [
+        "negative_orig": [
           "マルチプレイがシングルより機能が少なく、友達と一緒に楽しめない部分がある。",
           "後半になるとやることが少なくなってくる。エンドコンテンツが薄い。"
         ]
@@ -106,15 +171,33 @@
         "negative": [
           "Multiplayer feels like an afterthought. Missing many single-player features.",
           "The game crashes constantly on my setup despite meeting all requirements."
+        ],
+        "positive_orig": [
+          "Pure joy in a game. One of the most relaxing experiences ever made.",
+          "A masterpiece of indie game design. The attention to detail is incredible.",
+          "I've lost 500 hours and I regret nothing."
+        ],
+        "negative_orig": [
+          "Multiplayer feels like an afterthought. Missing many single-player features.",
+          "The game crashes constantly on my setup despite meeting all requirements."
         ]
       },
       "schinese": {
         "approval_rate": 0.93, "pos_count": 186, "neg_count": 14,
         "positive": [
+          "An incredibly healing game — the farming life is so beautiful.",
+          "The pinnacle of indie games; amazing that a single developer built this."
+        ],
+        "negative": [
+          "Multiplayer is too weak, with many restrictions when playing with friends.",
+          "Late-game content is somewhat monotonous; more expansion content would help.",
+          "Save system is not user-friendly — easy to lose progress."
+        ],
+        "positive_orig": [
           "超级治愈的游戏，农场生活太美好了。",
           "独立游戏的巅峰，开发者一个人做出来的太厉害了。"
         ],
-        "negative": [
+        "negative_orig": [
           "联机功能太弱了，和朋友一起玩会有很多限制。",
           "后期内容有些单调，希望能有更多的扩展内容。",
           "存档系统不够友好，容易丢失进度。"
@@ -123,10 +206,19 @@
       "russian": {
         "approval_rate": 0.89, "pos_count": 155, "neg_count": 19,
         "positive": [
+          "One of the best indie games of all time. Relaxing and deeply absorbing.",
+          "A great way to unwind after challenging games."
+        ],
+        "negative": [
+          "Multiplayer feels raw and unfinished.",
+          "After a few hundred hours it gets tedious — little end-game content.",
+          "The price feels high for the Russian market."
+        ],
+        "positive_orig": [
           "Одна из лучших инди игр всех времён. Расслабляющая и затягивающая.",
           "Отличный способ отдохнуть от сложных игр."
         ],
-        "negative": [
+        "negative_orig": [
           "Мультиплеер сырой и недоработанный.",
           "После нескольких сотен часов становится скучно — мало эндгейм контента.",
           "Цена для России завышена."
@@ -135,33 +227,58 @@
       "german": {
         "approval_rate": 0.91, "pos_count": 13, "neg_count": 1,
         "positive": [
+          "A wonderful, relaxing game. Perfect for unwinding.",
+          "One of the best indie games ever made. Timeless."
+        ],
+        "negative": [
+          "Multiplayer has too many restrictions compared to single-player."
+        ],
+        "positive_orig": [
           "Wunderschönes, entspannendes Spiel. Perfekt zum Abschalten.",
           "Eines der besten Indie-Spiele überhaupt. Zeitlos."
         ],
-        "negative": [
+        "negative_orig": [
           "Multiplayer hat zu viele Einschränkungen im Vergleich zum Singleplayer."
         ]
       },
       "koreana": {
         "approval_rate": 0.92, "pos_count": 53, "neg_count": 4,
         "positive": [
+          "The essence of healing games. Perfect when you're stressed.",
+          "One of the greatest indie game works in history."
+        ],
+        "negative": [
+          "Multiplayer has fewer features than single-player, making it difficult to enjoy with friends.",
+          "Late-game content is sparse."
+        ],
+        "positive_orig": [
           "힐링 게임의 정수. 스트레스 받을 때 하면 최고다.",
           "인디 게임 역사상 최고의 작품 중 하나."
         ],
-        "negative": [
+        "negative_orig": [
           "멀티플레이가 싱글보다 기능이 적어서 친구와 즐기기 어렵다.",
           "후반부 콘텐츠가 빈약하다."
         ]
       }
     },
     "cs2": {
-      "japanese":  {
+      "japanese": {
         "approval_rate": 0.48, "pos_count": 27, "neg_count": 29,
         "positive": [
+          "The origin of FPS. One of the few games where you can truly feel your own improvement.",
+          "The competitive scene is exciting. Watching pro matches first makes it twice as fun."
+        ],
+        "negative": [
+          "Too many cheaters. VAC anti-cheat is completely non-functional.",
+          "A downgrade from CS:GO. The reason for migrating is incomprehensible.",
+          "Japan server latency is high — comfortable play is impossible.",
+          "The matchmaking rank system is broken."
+        ],
+        "positive_orig": [
           "FPSの原点。スキルの上達を実感できる数少ないゲーム。",
           "競技シーンが熱い。プロの試合を観てから始めると楽しさが倍増する。"
         ],
-        "negative": [
+        "negative_orig": [
           "チーターが多すぎる。VAC（不正対策）が全く機能していない。",
           "CS:GOからの劣化版。なぜわざわざ移行したのか理解できない。",
           "日本サーバーのレイテンシが高く、快適に遊べない。",
@@ -180,15 +297,35 @@
           "Server tick rate is still too low for competitive play.",
           "Prime matchmaking is pay-to-win at this point.",
           "The game shipped in a worse state than CS:GO."
+        ],
+        "positive_orig": [
+          "Still the best competitive FPS out there when it works.",
+          "The gunplay is unmatched. Nothing else comes close to this skill ceiling."
+        ],
+        "negative_orig": [
+          "Cheaters in every other game. VAC is completely useless.",
+          "CS:GO was better. This feels like a downgrade.",
+          "Server tick rate is still too low for competitive play.",
+          "Prime matchmaking is pay-to-win at this point.",
+          "The game shipped in a worse state than CS:GO."
         ]
       },
       "schinese": {
         "approval_rate": 0.61, "pos_count": 122, "neg_count": 78,
         "positive": [
+          "The best competitive FPS, bar none.",
+          "The skill ceiling is very high — extremely rewarding when you play well."
+        ],
+        "negative": [
+          "Too many cheaters; anti-cheat is effectively non-existent.",
+          "Feels like a downgrade from CSGO, and the optimization is mediocre.",
+          "Domestic server latency is high — the experience is poor."
+        ],
+        "positive_orig": [
           "最好的竞技FPS，没有之一。",
           "技术天花板很高，打得好很有成就感。"
         ],
-        "negative": [
+        "negative_orig": [
           "外挂太多了，反作弊形同虚设。",
           "从CSGO换过来感觉变差了，优化也一般。",
           "国内服务器延迟高，体验很差。"
@@ -197,10 +334,20 @@
       "russian": {
         "approval_rate": 0.52, "pos_count": 104, "neg_count": 96,
         "positive": [
+          "Best tactical shooter. Skill determines everything.",
+          "Despite all the problems, there are no real alternatives."
+        ],
+        "negative": [
+          "Cheaters at every turn. VAC is a dead system.",
+          "CS:GO was better in every aspect.",
+          "Terrible optimization — constant freezes.",
+          "Matchmaking is broken; the ranking system simply does not work."
+        ],
+        "positive_orig": [
           "Лучший тактический шутер. Навык решает всё.",
           "Несмотря на все проблемы, альтернатив нет."
         ],
-        "negative": [
+        "negative_orig": [
           "Читеры на каждом шагу. VAC — мёртвая система.",
           "CS:GO был лучше по всем параметрам.",
           "Оптимизация ужасная, фризы постоянные.",
@@ -210,10 +357,19 @@
       "german": {
         "approval_rate": 0.63, "pos_count": 126, "neg_count": 74,
         "positive": [
+          "Best competitive shooter on the market.",
+          "High skill curve, fair mechanics when there are no cheaters involved."
+        ],
+        "negative": [
+          "The cheating problem is intolerable. Valve does nothing about it.",
+          "CS:GO was technically superior. A downgrade in many areas.",
+          "Server performance is unacceptable for a competitive title."
+        ],
+        "positive_orig": [
           "Bester kompetitiver Shooter am Markt.",
           "Hohe Skill-Kurve, faire Mechaniken wenn keine Cheater dabei sind."
         ],
-        "negative": [
+        "negative_orig": [
           "Cheat-Problem ist unerträglich. Valve tut nichts dagegen.",
           "CS:GO war technisch besser. Downgrade in vielen Bereichen.",
           "Server-Performance ist inakzeptabel für ein kompetitives Spiel."
@@ -222,10 +378,19 @@
       "koreana": {
         "approval_rate": 0.58, "pos_count": 116, "neg_count": 84,
         "positive": [
+          "The best competitive FPS. Skill directly translates to results.",
+          "The esports scene is alive, making spectating enjoyable too."
+        ],
+        "negative": [
+          "Way too many hackers. VAC is completely dead.",
+          "CS:GO was better. This feels like a regression.",
+          "Korea server ping is high — comfortable play is not possible."
+        ],
+        "positive_orig": [
           "최고의 경쟁 FPS. 실력이 곧 결과로 이어진다.",
           "e스포츠 씬이 살아있어서 관전도 재미있다."
         ],
-        "negative": [
+        "negative_orig": [
           "핵 유저가 너무 많다. VAC는 완전히 죽었다.",
           "CS:GO가 더 나았다. 퇴보한 느낌이다.",
           "한국 서버 핑이 높아서 쾌적하게 플레이하기 어렵다."
@@ -233,13 +398,21 @@
       }
     },
     "cyberpunk": {
-      "japanese":  {
+      "japanese": {
         "approval_rate": 0.88, "pos_count": 100, "neg_count": 14,
         "positive": [
+          "Completely reborn with the 2.0 update. Now it's the finest RPG I can recommend.",
+          "The world and story are overwhelming. Night City feels like a place you genuinely inhabit."
+        ],
+        "negative": [
+          "Cannot forgive the state it was sold in at launch. It amounted to false advertising.",
+          "The DLC is too expensive. Combined with the base game, it's hard on the wallet."
+        ],
+        "positive_orig": [
           "2.0アップデートで完全に生まれ変わった。今ならおすすめできる最高のRPG。",
           "世界観とストーリーが圧倒的。ナイトシティに本当に生きている感覚がある。"
         ],
-        "negative": [
+        "negative_orig": [
           "発売当初の状態で販売したことは許せない。詐欺的な販売方法だった。",
           "DLCが高額すぎる。本編と合わせると財布に痛い。"
         ]
@@ -256,15 +429,35 @@
           "The police system is still a joke even after all the updates.",
           "RPG mechanics are shallow compared to what was promised.",
           "Too many bugs still exist. QA team needs to do better."
+        ],
+        "positive_orig": [
+          "After all the patches, this is one of the best RPGs ever made.",
+          "Night City is the most detailed open world I've ever experienced.",
+          "Phantom Liberty is an incredible DLC. Best story content in years."
+        ],
+        "negative_orig": [
+          "Should never have been released in its launch state. Still bitter.",
+          "The police system is still a joke even after all the updates.",
+          "RPG mechanics are shallow compared to what was promised.",
+          "Too many bugs still exist. QA team needs to do better."
         ]
       },
       "schinese": {
         "approval_rate": 0.76, "pos_count": 152, "neg_count": 48,
         "positive": [
+          "Completely transformed after the 2.0 update — now it's a genuinely great game.",
+          "The details of Night City are breathtaking; the immersion is extraordinary."
+        ],
+        "negative": [
+          "The launch state was a betrayal of players; it should not be forgiven.",
+          "DLC pricing is too high — not considerate of Chinese players.",
+          "The police system is still weak despite numerous updates."
+        ],
+        "positive_orig": [
           "2.0更新之后脱胎换骨，现在是真正的好游戏了。",
           "夜之城的细节令人叹为观止，沉浸感极强。"
         ],
-        "negative": [
+        "negative_orig": [
           "发售时的状态是对玩家的欺骗，不应该原谅。",
           "DLC定价太贵，对中国玩家不友好。",
           "警察系统经过多次更新依然很差劲。"
@@ -273,10 +466,20 @@
       "russian": {
         "approval_rate": 0.71, "pos_count": 142, "neg_count": 58,
         "positive": [
+          "After update 2.0 — a masterpiece. The best open world available.",
+          "Night City is a genuine work of art."
+        ],
+        "negative": [
+          "The launch was a catastrophe. Still have not forgiven CDPR.",
+          "Promised one thing, delivered another. Pure marketing deception.",
+          "DLC is unjustifiably expensive.",
+          "RPG mechanics are weaker than in The Witcher 3."
+        ],
+        "positive_orig": [
           "После обновления 2.0 — шедевр. Лучший открытый мир.",
           "Найт-Сити — это произведение искусства."
         ],
-        "negative": [
+        "negative_orig": [
           "Релиз был катастрофой. До сих пор не простил CDPR.",
           "Обещали одно — дали другое. Маркетинговая ложь.",
           "DLC стоит неоправданно дорого.",
@@ -286,10 +489,19 @@
       "german": {
         "approval_rate": 0.74, "pos_count": 67, "neg_count": 23,
         "positive": [
+          "After Patch 2.0, finally the game that was promised.",
+          "Night City is technically impressive and atmospherically dense."
+        ],
+        "negative": [
+          "The launch state was a scandal — outright consumer deception.",
+          "By German legal standards, this bordered on fraudulent advertising.",
+          "DLC price is too high for the content volume offered."
+        ],
+        "positive_orig": [
           "Nach Patch 2.0 endlich das Spiel, das versprochen wurde.",
           "Night City ist technisch beeindruckend und atmosphärisch dicht."
         ],
-        "negative": [
+        "negative_orig": [
           "Der Launch-Zustand war ein Skandal. Verbrauchertäuschung.",
           "Für deutsche Verhältnisse war das fast schon strafrechtlich relevant.",
           "DLC-Preis zu hoch für den gebotenen Umfang."
@@ -298,10 +510,19 @@
       "koreana": {
         "approval_rate": 0.72, "pos_count": 72, "neg_count": 28,
         "positive": [
+          "Completely changed after the 2.0 update. Now highly recommended.",
+          "The details of Night City are overwhelming."
+        ],
+        "negative": [
+          "The launch state is unacceptable. Still angry about it.",
+          "What was promised and what was delivered were too different.",
+          "DLC is too expensive."
+        ],
+        "positive_orig": [
           "2.0 업데이트 후 완전히 달라졌다. 지금은 강력 추천.",
           "나이트 시티의 디테일이 압도적이다."
         ],
-        "negative": [
+        "negative_orig": [
           "출시 당시 상태는 용납할 수 없다. 아직도 화가 난다.",
           "약속한 것과 실제가 너무 달랐다.",
           "DLC 가격이 너무 비싸다."
@@ -309,13 +530,21 @@
       }
     },
     "minecraft": {
-      "japanese":  {
+      "japanese": {
         "approval_rate": 0.67, "pos_count": 14, "neg_count": 7,
         "positive": [
+          "A wellspring of creativity. The joy of building your own world is unparalleled.",
+          "A unique game that can be enjoyed by children and adults alike."
+        ],
+        "negative": [
+          "The Steam version has functional gaps versus the Java edition — mods are much harder to use.",
+          "The price is high and sales are virtually non-existent, which is frustrating."
+        ],
+        "positive_orig": [
           "創造性の塊。自分だけの世界を作る喜びはほかにない。",
           "子供から大人まで楽しめる唯一無二のゲーム。"
         ],
-        "negative": [
+        "negative_orig": [
           "Steam版はJava版と機能差があり、MODが使いにくい。",
           "価格が高い。セールをほとんどやらないのが不満。"
         ]
@@ -331,15 +560,34 @@
           "Microsoft's monetization of this game is getting out of hand.",
           "No mods on this version. That's the whole point of Minecraft.",
           "Price never goes on sale. Ridiculous for a game this old."
+        ],
+        "positive_orig": [
+          "The greatest sandbox game ever made. Infinite creativity.",
+          "I've played this for 10 years and I'm still finding new things."
+        ],
+        "negative_orig": [
+          "The Steam version is inferior to the Java edition. Why even bother?",
+          "Microsoft's monetization of this game is getting out of hand.",
+          "No mods on this version. That's the whole point of Minecraft.",
+          "Price never goes on sale. Ridiculous for a game this old."
         ]
       },
       "schinese": {
         "approval_rate": 0.68, "pos_count": 42, "neg_count": 19,
         "positive": [
+          "A game of infinite creativity — still playing after ten years.",
+          "Suitable for all ages; a truly universal game."
+        ],
+        "negative": [
+          "Steam version doesn't support mods, far inferior to Java edition.",
+          "Increasingly commercialized since the Microsoft acquisition — disappointing.",
+          "Never goes on sale. The pricing strategy is inexplicable."
+        ],
+        "positive_orig": [
           "创造力无限的游戏，玩了十年还在玩。",
           "适合所有年龄段，是真正意义上的全民游戏。"
         ],
-        "negative": [
+        "negative_orig": [
           "Steam版不支持Mod，比Java版差太多了。",
           "微软收购后越来越商业化，令人失望。",
           "从来不打折，定价策略有问题。"
@@ -348,10 +596,20 @@
       "russian": {
         "approval_rate": 0.65, "pos_count": 65, "neg_count": 35,
         "positive": [
+          "The best sandbox in history. Boundless creativity.",
+          "Been playing for 12 years — still not bored."
+        ],
+        "negative": [
+          "Steam version is worse than Java Edition in every way.",
+          "Microsoft is turning the game into a microtransaction shop.",
+          "No mods — no reason to buy on Steam.",
+          "Price never drops. Pure greed."
+        ],
+        "positive_orig": [
           "Лучший sandbox в истории. Безграничное творчество.",
           "Играю уже 12 лет — и не надоедает."
         ],
-        "negative": [
+        "negative_orig": [
           "Steam-версия хуже Java Edition во всём.",
           "Microsoft превращает игру в магазин микротранзакций.",
           "Нет модов — нет смысла покупать на Steam.",
@@ -361,10 +619,18 @@
       "german": {
         "approval_rate": 0.75, "pos_count": 75, "neg_count": 7,
         "positive": [
+          "The most creative game of all time. Suitable for all age groups.",
+          "Kids love it, adults too. A timeless masterpiece."
+        ],
+        "negative": [
+          "Steam version does not support mods. That is the core of Minecraft.",
+          "Microsoft monetizes too aggressively."
+        ],
+        "positive_orig": [
           "Das kreativste Spiel aller Zeiten. Für alle Altersgruppen geeignet.",
           "Kinder lieben es, Erwachsene auch. Zeitloses Meisterwerk."
         ],
-        "negative": [
+        "negative_orig": [
           "Steam-Version unterstützt keine Mods. Das ist das Herzstück von Minecraft.",
           "Microsoft monetarisiert zu aggressiv."
         ]
@@ -372,10 +638,19 @@
       "koreana": {
         "approval_rate": 0.55, "pos_count": 11, "neg_count": 8,
         "positive": [
+          "The pinnacle of creativity. Enjoyable for all age groups.",
+          "Still not bored after more than 10 years."
+        ],
+        "negative": [
+          "Steam version has far fewer features than Java edition.",
+          "Commercialization has worsened significantly since the Microsoft acquisition.",
+          "No discounts whatsoever. The pricing policy makes no sense."
+        ],
+        "positive_orig": [
           "창의력의 끝판왕. 모든 연령대가 즐길 수 있다.",
           "10년 넘게 하는데도 질리지 않는다."
         ],
-        "negative": [
+        "negative_orig": [
           "Steam 버전은 Java 에디션보다 기능이 훨씬 부족하다.",
           "마이크로소프트 인수 이후 상업화가 심해졌다.",
           "할인을 전혀 안 한다. 가격 정책이 이해되지 않는다."

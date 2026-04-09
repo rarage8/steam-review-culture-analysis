@@ -108,20 +108,22 @@ def export(
             approval_rate = pos_count / total if total > 0 else 0.0
 
             # votes_up でソートしてサンプリング（なければ先頭N件）
-            def sample_reviews(df: pd.DataFrame, n: int) -> list[str]:
+            def sample_reviews(df: pd.DataFrame, n: int, col: str) -> list[str]:
                 if df.empty:
                     return []
                 if "votes_up" in df.columns:
                     df = df.sort_values("votes_up", ascending=False)
-                texts = df["review_text_en"].dropna().tolist()
+                texts = df[col].dropna().tolist()
                 return [t for t in texts[:n] if isinstance(t, str) and t.strip()]
 
             reviews_data[slug][lang] = {
                 "approval_rate": round(approval_rate, 4),
                 "pos_count":     pos_count,
                 "neg_count":     neg_count,
-                "positive":      sample_reviews(pos_df, sample_pos),
-                "negative":      sample_reviews(neg_df, sample_neg),
+                "positive":      sample_reviews(pos_df, sample_pos, "review_text_en"),
+                "negative":      sample_reviews(neg_df, sample_neg, "review_text_en"),
+                "positive_orig": sample_reviews(pos_df, sample_pos, "review_text_orig"),
+                "negative_orig": sample_reviews(neg_df, sample_neg, "review_text_orig"),
             }
 
             logger.info(
