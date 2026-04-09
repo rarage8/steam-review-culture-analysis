@@ -18,6 +18,7 @@ build/
 data/raw/
 data/processed/
 data/classified/
+web/data/review_translation_cache.json
 
 # 生成物
 figures/

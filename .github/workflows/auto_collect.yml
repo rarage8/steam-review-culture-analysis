@@ -1,181 +1,35 @@
-name: Auto-collect Steam reviews
-
-# ──────────────────────────────────────────────────────────────────────────────
-# スケジュール実行 (毎週日曜 UTC 02:00) または手動トリガー
-# 新しい人気ゲームを検出 → フルパイプライン実行 → games.json を自動コミット
-#
-# 必要な GitHub Secrets:
-#   ANTHROPIC_API_KEY  — Claude API キー（翻訳・分類に使用）
-#
-# オプション GitHub Variables:
-#   MAX_NEW_GAMES     — 1回の実行で追加する最大ゲーム数 (default: 3)
-#   MIN_POSITIVE      — 最低ポジティブレビュー数 (default: 5000)
-# ──────────────────────────────────────────────────────────────────────────────
+﻿name: Refresh Steam dashboard data
 
 on:
   schedule:
-    - cron: '0 2 * * 0'   # 毎週日曜 02:00 UTC
+    - cron: '0 2 * * *'
   workflow_dispatch:
-    inputs:
-      max_new_games:
-        description: '追加するゲームの上限数'
-        required: false
-        default: '3'
-      min_positive:
-        description: '最低ポジティブレビュー数'
-        required: false
-        default: '5000'
-      overwrite:
-        description: '既存データを上書きする (true/false)'
-        required: false
-        default: 'false'
 
 jobs:
-  auto-collect:
+  refresh:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
-
     steps:
-      # ── 1. チェックアウト ─────────────────────────────────────────────────
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      # ── 2. Python セットアップ ────────────────────────────────────────────
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: 'pip'
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      # ── 3. 新規ゲームの検出 ───────────────────────────────────────────────
-      - name: Detect new popular games
-        id: detect
-        run: |
-          MAX=${{ github.event.inputs.max_new_games || vars.MAX_NEW_GAMES || '3' }}
-          MIN=${{ github.event.inputs.min_positive  || vars.MIN_POSITIVE  || '5000' }}
-          cd src
-          python monitor_games.py \
-            --top 500 \
-            --min-pos "$MIN" \
-            --limit "$MAX" \
-            --output ../new_games_detected.json
-          COUNT=$(python -c "import json; d=json.load(open('../new_games_detected.json')); print(len(d))")
-          echo "new_count=$COUNT" >> "$GITHUB_OUTPUT"
-          echo "Detected $COUNT new games."
-
-      # ── 4. パイプライン実行 ───────────────────────────────────────────────
-      - name: Run full pipeline for new games
-        if: steps.detect.outputs.new_count != '0'
+      - run: pip install -r requirements.txt
+      - name: Refresh dashboard data
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          OVERWRITE=${{ github.event.inputs.overwrite || 'false' }}
-          OVERWRITE_FLAG=""
-          if [ "$OVERWRITE" = "true" ]; then OVERWRITE_FLAG="--overwrite"; fi
-
-          python - <<'PYEOF'
-          import json, sys
-          from pathlib import Path
-
-          sys.path.insert(0, "src")
-          games_raw = json.loads(Path("new_games_detected.json").read_text())
-          game_list = [(g["title"], g["appid"]) for g in games_raw]
-          print(f"Pipeline targets: {[t for t, _ in game_list]}")
-
-          overwrite = "$OVERWRITE_FLAG" == "--overwrite"
-
-          # Step 1: レビュー取得（API コストなし）
-          from fetch_reviews import run_collection
-          run_collection(game_list=game_list, overwrite=overwrite)
-
-          # Step 2: 翻訳
-          from translate import run_translation
-          run_translation(game_list=game_list, overwrite=overwrite)
-
-          # Step 3: 分類 + 感情分析
-          from classify import run_classification
-          run_classification(game_list=game_list, overwrite=overwrite)
-
-          # Step 4.5: エクスポート（全ゲーム対象）
-          from export_web_data import export
-          from games_list import GAMES
-          all_games = [(t, a) for t, a, *_ in GAMES]
-          # 新ゲームを追加
-          known_appids = {a for _, a in all_games}
-          for t, a in game_list:
-              if a not in known_appids:
-                  all_games.append((t, a))
-          export(game_list=all_games)
-          print("Pipeline complete.")
-          PYEOF
-
-      # 新ゲームがない場合でも既存データのエクスポートを更新
-      - name: Re-export existing data (no new games)
-        if: steps.detect.outputs.new_count == '0'
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          python src/refresh_dashboard_data.py --detect-new --auto-add
+      - name: Commit refreshed data
         run: |
-          cd src
-          python export_web_data.py
-          echo "Re-exported existing data."
-
-      # ── 5. games.json のコミット ──────────────────────────────────────────
-      - name: Commit updated games.json
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add web/data/games.json
-          # 変更がある場合のみコミット
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git add src/games_list.py web/data/games.json data/player_counts/current_players.csv new_games_detected.json
           if git diff --staged --quiet; then
-            echo "No changes to games.json, skipping commit."
+            echo "No changes"
           else
-            COUNT=${{ steps.detect.outputs.new_count }}
-            git commit -m "chore(data): auto-update games.json (${COUNT} new games)"
+            git commit -m "chore(data): refresh dashboard assets"
             git push
           fi
-
-      # ── 6. 新ゲームがある場合は PR も作成 ────────────────────────────────
-      - name: Create PR for new games (games_list.py update)
-        if: steps.detect.outputs.new_count != '0'
-        run: |
-          cd src
-          python monitor_games.py \
-            --top 500 \
-            --auto-add \
-            --output /dev/null || true
-          cd ..
-          git add src/games_list.py new_games_detected.json
-          if git diff --staged --quiet; then
-            echo "No games_list.py changes to PR."
-          else
-            BRANCH="auto/new-games-$(date +%Y%m%d)"
-            git checkout -b "$BRANCH"
-            git commit -m "feat(games): auto-add new popular Steam games"
-            git push origin "$BRANCH"
-            gh pr create \
-              --title "Auto: New popular Steam games detected" \
-              --body "$(cat <<'EOF'
-## 自動検出された新ゲーム
-
-SteamSpy モニタリングによって新たな人気ゲームが検出されました。
-`new_games_detected.json` を確認し、必要であれば `games_list.py` の
-ジャンルや地域情報を手動で修正してください。
-
-マージ後、次回の自動実行でレビューデータが収集されます。
-
----
-🤖 Generated by [auto_collect.yml](.github/workflows/auto_collect.yml)
-EOF
-)" \
-              --base master \
-              --head "$BRANCH"
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
