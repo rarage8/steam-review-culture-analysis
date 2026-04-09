@@ -27,12 +27,14 @@ PROCESSED_DIR = ROOT / "data" / "processed"
 CLASSIFIED_DIR = ROOT / "data" / "classified"
 PLAYER_COUNTS_DIR = ROOT / "data" / "player_counts"
 WEB_DATA_DIR = ROOT / "web" / "data"
+REVIEW_DETAILS_DIR = WEB_DATA_DIR / "review_details"
 WEB_DATA_DIR.mkdir(parents=True, exist_ok=True)
 PLAYER_COUNTS_DIR.mkdir(parents=True, exist_ok=True)
+REVIEW_DETAILS_DIR.mkdir(parents=True, exist_ok=True)
 
 LANGUAGES = ["japanese", "english", "schinese", "russian", "german", "koreana"]
 REVIEW_TYPES = ["positive", "negative"]
-SAMPLE_PER_SENTIMENT = 8
+TRANSLATION_BATCH_SIZE = 20
 TRANSLATION_MODEL = "claude-sonnet-4-5"
 
 
@@ -247,18 +249,30 @@ def translate_batch(
     return texts
 
 
-def translate_review_samples(
-    review_rows: list[dict[str, str]],
+def translate_review_rows(
+    review_rows: list[dict[str, Any]],
     source_language: str,
     client: Any | None,
     cache: dict[str, dict[str, str]],
 ) -> list[dict[str, Any]]:
-    translated_reviews: list[dict[str, Any]] = []
-    for row in review_rows:
-        original = row["original"]
-        english = row["english"] or original
-        translations: dict[str, str] = {}
-        for target in LANGUAGES:
+    if not review_rows:
+        return []
+
+    translations_by_target: dict[str, list[str]] = {target: [""] * len(review_rows) for target in LANGUAGES}
+    english_texts = [row["english"] or row["original"] for row in review_rows]
+    original_texts = [row["original"] or row["english"] for row in review_rows]
+
+    for target in LANGUAGES:
+        if target == source_language:
+            translations_by_target[target] = list(original_texts)
+            continue
+        if target == "english":
+            translations_by_target[target] = list(english_texts)
+            continue
+
+        missing_indices: list[int] = []
+        missing_texts: list[str] = []
+        for index, english in enumerate(english_texts):
             cache_key = json.dumps(
                 {"src": source_language, "target": target, "text": english},
                 ensure_ascii=False,
@@ -266,24 +280,41 @@ def translate_review_samples(
             )
             cached = cache.get(cache_key, {}).get("text")
             if cached:
-                translations[target] = cached
+                translations_by_target[target][index] = cached
                 continue
+            missing_indices.append(index)
+            missing_texts.append(english)
 
-            if target == source_language:
-                translated = original
-            elif target == "english":
-                translated = english
-            else:
-                translated = translate_batch([english], "english", target, client)[0]
+        if not missing_indices:
+            continue
+
+        translated_chunks: list[str] = []
+        for start in range(0, len(missing_texts), TRANSLATION_BATCH_SIZE):
+            batch = missing_texts[start : start + TRANSLATION_BATCH_SIZE]
+            translated_chunks.extend(translate_batch(batch, "english", target, client))
+
+        for index, translated in zip(missing_indices, translated_chunks):
+            translations_by_target[target][index] = translated
             if client is not None:
+                cache_key = json.dumps(
+                    {"src": source_language, "target": target, "text": english_texts[index]},
+                    ensure_ascii=False,
+                    sort_keys=True,
+                )
                 cache[cache_key] = {"text": translated}
-            translations[target] = translated
 
+    translated_reviews: list[dict[str, Any]] = []
+    for index, row in enumerate(review_rows):
         translated_reviews.append(
             {
-                "original": original,
-                "english": english,
-                "translations": translations,
+                "id": row["id"],
+                "votes_up": row["votes_up"],
+                "hours_before_review": row["hours_before_review"],
+                "days_before_review": row["days_before_review"],
+                "created_at": row["created_at"],
+                "original": original_texts[index],
+                "english": english_texts[index],
+                "translations": {target: translations_by_target[target][index] for target in LANGUAGES},
             }
         )
     return translated_reviews
@@ -309,19 +340,35 @@ def summarize_timing(df: pd.DataFrame) -> dict[str, float | int | None]:
     }
 
 
-def sample_review_rows(df: pd.DataFrame, limit: int) -> list[dict[str, str]]:
+def exportable_review_rows(df: pd.DataFrame) -> list[dict[str, Any]]:
     if df.empty:
         return []
     ranked = df.sort_values(["votes_up", "time_spent_before_review_h"], ascending=[False, False])
-    rows: list[dict[str, str]] = []
-    for _, row in ranked.iterrows():
+    rows: list[dict[str, Any]] = []
+    for idx, row in ranked.iterrows():
         original = _normalize_text(row.get("review_text_orig"))
         english = _normalize_text(row.get("review_text_en"))
         if not original and not english:
             continue
-        rows.append({"original": original or english, "english": english or original})
-        if len(rows) >= limit:
-            break
+        created_at = row.get("timestamp_created")
+        if pd.notna(created_at):
+            try:
+                created_at = datetime.fromtimestamp(float(created_at), tz=timezone.utc).isoformat()
+            except (TypeError, ValueError, OSError):
+                created_at = None
+        else:
+            created_at = None
+        rows.append(
+            {
+                "id": str(idx),
+                "original": original or english,
+                "english": english or original,
+                "votes_up": int(row.get("votes_up", 0) or 0),
+                "hours_before_review": row.get("time_spent_before_review_h"),
+                "days_before_review": row.get("time_spent_before_review_d"),
+                "created_at": created_at,
+            }
+        )
     return rows
 
 
@@ -329,13 +376,26 @@ def load_population_snapshots() -> pd.DataFrame:
     snapshot_path = PLAYER_COUNTS_DIR / "current_players.csv"
     if not snapshot_path.exists():
         return pd.DataFrame(columns=["collected_at", "appid", "current_players"])
-    df = pd.read_csv(snapshot_path, encoding="utf-8")
+    try:
+        df = pd.read_csv(snapshot_path, encoding="utf-8")
+    except pd.errors.EmptyDataError:
+        return pd.DataFrame(columns=["collected_at", "appid", "current_players"])
     if df.empty:
         return df
     df["collected_at"] = pd.to_datetime(df["collected_at"], errors="coerce", utc=True)
     df["appid"] = pd.to_numeric(df["appid"], errors="coerce").astype("Int64")
     df["current_players"] = pd.to_numeric(df["current_players"], errors="coerce")
     return df.dropna(subset=["collected_at", "appid", "current_players"])
+
+
+def write_review_detail_file(
+    game_id: str,
+    language: str,
+    review_payload: dict[str, Any],
+) -> str:
+    path = REVIEW_DETAILS_DIR / f"{game_id}_{language}.json"
+    path.write_text(json.dumps(review_payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return f"data/review_details/{path.name}"
 
 
 def aggregate_population(
@@ -380,7 +440,6 @@ def aggregate_population(
 
 def build_dashboard_data(
     game_list: list[tuple[str, int]] | None = None,
-    sample_per_sentiment: int = SAMPLE_PER_SENTIMENT,
 ) -> dict[str, Any]:
     if game_list is None:
         game_list = [(title, appid) for title, appid, *_ in GAMES]
@@ -431,9 +490,9 @@ def build_dashboard_data(
             neg_count = len(sentiment_frames["negative"])
             approval_rate = round(pos_count / total, 4) if total else 0.0
 
-            samples = {
-                sentiment: translate_review_samples(
-                    sample_review_rows(frame, sample_per_sentiment),
+            detail_reviews = {
+                sentiment: translate_review_rows(
+                    exportable_review_rows(frame),
                     source_language=language,
                     client=translation_client,
                     cache=translation_cache,
@@ -447,6 +506,24 @@ def build_dashboard_data(
                 merged_hours = pd.to_numeric(df_all["time_spent_before_review_h"], errors="coerce").dropna()
                 avg_hours = round(float(merged_hours.mean()), 2) if not merged_hours.empty else None
 
+            detail_path = write_review_detail_file(
+                meta["id"],
+                language,
+                {
+                    "game_id": meta["id"],
+                    "game_title": meta["title"],
+                    "language": language,
+                    "symbols": {"positive": "▲", "neutral": "♦", "negative": "▼"},
+                    "counts": {
+                        "total": total,
+                        "positive": pos_count,
+                        "neutral": neu_count,
+                        "negative": neg_count,
+                    },
+                    "reviews": detail_reviews,
+                },
+            )
+
             game_languages[language] = {
                 "approval_rate": approval_rate,
                 "total_count": total,
@@ -455,7 +532,7 @@ def build_dashboard_data(
                 "neg_count": neg_count,
                 "avg_playtime_review_h": avg_hours,
                 "review_timing": timing,
-                "sample_reviews": samples,
+                "detail_path": detail_path,
             }
             logger.info(
                 "%s | %s | pos=%d neu=%d neg=%d rate=%.2f",
@@ -489,6 +566,7 @@ def build_dashboard_data(
             "timing_metric": "time_spent_before_review",
             "timing_metric_unit": "days",
             "population_source": "data/player_counts/current_players.csv",
+            "review_symbols": {"positive": "▲", "neutral": "♦", "negative": "▼"},
         },
         "games": sorted(games_meta, key=lambda item: item["title"].lower()),
         "reviews": reviews_data,
@@ -498,9 +576,8 @@ def build_dashboard_data(
 
 def export_dashboard_data(
     game_list: list[tuple[str, int]] | None = None,
-    sample_per_sentiment: int = SAMPLE_PER_SENTIMENT,
 ) -> Path:
-    payload = build_dashboard_data(game_list=game_list, sample_per_sentiment=sample_per_sentiment)
+    payload = build_dashboard_data(game_list=game_list)
     out_path = WEB_DATA_DIR / "games.json"
     out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     logger.info("Exported dashboard data to %s", out_path)

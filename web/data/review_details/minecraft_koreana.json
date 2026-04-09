@@ -1,0 +1,448 @@
+{
+  "game_id": "minecraft",
+  "game_title": "Minecraft",
+  "language": "koreana",
+  "symbols": {
+    "positive": "▲",
+    "neutral": "♦",
+    "negative": "▼"
+  },
+  "counts": {
+    "total": 25,
+    "positive": 19,
+    "neutral": 0,
+    "negative": 6
+  },
+  "reviews": {
+    "positive": [
+      {
+        "id": "7",
+        "votes_up": 0,
+        "hours_before_review": 48.48,
+        "days_before_review": 2.02,
+        "created_at": "2026-01-09T09:55:24+00:00",
+        "original": "별 없는 밤 개사기",
+        "english": "별 없는 밤 개사기",
+        "translations": {
+          "japanese": "별 없는 밤 개사기",
+          "english": "별 없는 밤 개사기",
+          "schinese": "별 없는 밤 개사기",
+          "russian": "별 없는 밤 개사기",
+          "german": "별 없는 밤 개사기",
+          "koreana": "별 없는 밤 개사기"
+        }
+      },
+      {
+        "id": "15",
+        "votes_up": 0,
+        "hours_before_review": 48.48,
+        "days_before_review": 2.02,
+        "created_at": "2026-01-09T09:55:24+00:00",
+        "original": "별 없는 밤 개사기",
+        "english": "별 없는 밤 개사기",
+        "translations": {
+          "japanese": "별 없는 밤 개사기",
+          "english": "별 없는 밤 개사기",
+          "schinese": "별 없는 밤 개사기",
+          "russian": "별 없는 밤 개사기",
+          "german": "별 없는 밤 개사기",
+          "koreana": "별 없는 밤 개사기"
+        }
+      },
+      {
+        "id": "1",
+        "votes_up": 0,
+        "hours_before_review": 43.27,
+        "days_before_review": 1.8,
+        "created_at": "2026-03-30T10:35:45+00:00",
+        "original": "마우스로 하니 손가락 빠지겠다",
+        "english": "마우스로 하니 손가락 빠지겠다",
+        "translations": {
+          "japanese": "마우스로 하니 손가락 빠지겠다",
+          "english": "마우스로 하니 손가락 빠지겠다",
+          "schinese": "마우스로 하니 손가락 빠지겠다",
+          "russian": "마우스로 하니 손가락 빠지겠다",
+          "german": "마우스로 하니 손가락 빠지겠다",
+          "koreana": "마우스로 하니 손가락 빠지겠다"
+        }
+      },
+      {
+        "id": "5",
+        "votes_up": 0,
+        "hours_before_review": 43.27,
+        "days_before_review": 1.8,
+        "created_at": "2026-03-30T10:35:45+00:00",
+        "original": "마우스로 하니 손가락 빠지겠다",
+        "english": "마우스로 하니 손가락 빠지겠다",
+        "translations": {
+          "japanese": "마우스로 하니 손가락 빠지겠다",
+          "english": "마우스로 하니 손가락 빠지겠다",
+          "schinese": "마우스로 하니 손가락 빠지겠다",
+          "russian": "마우스로 하니 손가락 빠지겠다",
+          "german": "마우스로 하니 손가락 빠지겠다",
+          "koreana": "마우스로 하니 손가락 빠지겠다"
+        }
+      },
+      {
+        "id": "13",
+        "votes_up": 0,
+        "hours_before_review": 43.27,
+        "days_before_review": 1.8,
+        "created_at": "2026-03-30T10:35:45+00:00",
+        "original": "마우스로 하니 손가락 빠지겠다",
+        "english": "마우스로 하니 손가락 빠지겠다",
+        "translations": {
+          "japanese": "마우스로 하니 손가락 빠지겠다",
+          "english": "마우스로 하니 손가락 빠지겠다",
+          "schinese": "마우스로 하니 손가락 빠지겠다",
+          "russian": "마우스로 하니 손가락 빠지겠다",
+          "german": "마우스로 하니 손가락 빠지겠다",
+          "koreana": "마우스로 하니 손가락 빠지겠다"
+        }
+      },
+      {
+        "id": "6",
+        "votes_up": 0,
+        "hours_before_review": 42.45,
+        "days_before_review": 1.77,
+        "created_at": "2026-02-19T06:48:53+00:00",
+        "original": "가끔 찍어 먹으면 시간 녹습니다",
+        "english": "가끔 찍어 먹으면 시간 녹습니다",
+        "translations": {
+          "japanese": "가끔 찍어 먹으면 시간 녹습니다",
+          "english": "가끔 찍어 먹으면 시간 녹습니다",
+          "schinese": "가끔 찍어 먹으면 시간 녹습니다",
+          "russian": "가끔 찍어 먹으면 시간 녹습니다",
+          "german": "가끔 찍어 먹으면 시간 녹습니다",
+          "koreana": "가끔 찍어 먹으면 시간 녹습니다"
+        }
+      },
+      {
+        "id": "14",
+        "votes_up": 0,
+        "hours_before_review": 42.45,
+        "days_before_review": 1.77,
+        "created_at": "2026-02-19T06:48:53+00:00",
+        "original": "가끔 찍어 먹으면 시간 녹습니다",
+        "english": "가끔 찍어 먹으면 시간 녹습니다",
+        "translations": {
+          "japanese": "가끔 찍어 먹으면 시간 녹습니다",
+          "english": "가끔 찍어 먹으면 시간 녹습니다",
+          "schinese": "가끔 찍어 먹으면 시간 녹습니다",
+          "russian": "가끔 찍어 먹으면 시간 녹습니다",
+          "german": "가끔 찍어 먹으면 시간 녹습니다",
+          "koreana": "가끔 찍어 먹으면 시간 녹습니다"
+        }
+      },
+      {
+        "id": "4",
+        "votes_up": 0,
+        "hours_before_review": 35.68,
+        "days_before_review": 1.49,
+        "created_at": "2026-01-26T15:28:47+00:00",
+        "original": "재밌는데 하다보면 할거 없음",
+        "english": "재밌는데 하다보면 할거 없음",
+        "translations": {
+          "japanese": "재밌는데 하다보면 할거 없음",
+          "english": "재밌는데 하다보면 할거 없음",
+          "schinese": "재밌는데 하다보면 할거 없음",
+          "russian": "재밌는데 하다보면 할거 없음",
+          "german": "재밌는데 하다보면 할거 없음",
+          "koreana": "재밌는데 하다보면 할거 없음"
+        }
+      },
+      {
+        "id": "12",
+        "votes_up": 0,
+        "hours_before_review": 35.68,
+        "days_before_review": 1.49,
+        "created_at": "2026-01-26T15:28:47+00:00",
+        "original": "재밌는데 하다보면 할거 없음",
+        "english": "재밌는데 하다보면 할거 없음",
+        "translations": {
+          "japanese": "재밌는데 하다보면 할거 없음",
+          "english": "재밌는데 하다보면 할거 없음",
+          "schinese": "재밌는데 하다보면 할거 없음",
+          "russian": "재밌는데 하다보면 할거 없음",
+          "german": "재밌는데 하다보면 할거 없음",
+          "koreana": "재밌는데 하다보면 할거 없음"
+        }
+      },
+      {
+        "id": "0",
+        "votes_up": 0,
+        "hours_before_review": 24.0,
+        "days_before_review": 1.0,
+        "created_at": "2026-03-07T16:24:55+00:00",
+        "original": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+        "english": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+        "translations": {
+          "japanese": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "english": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "schinese": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "russian": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "german": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "koreana": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다"
+        }
+      },
+      {
+        "id": "3",
+        "votes_up": 0,
+        "hours_before_review": 24.0,
+        "days_before_review": 1.0,
+        "created_at": "2026-03-07T16:24:55+00:00",
+        "original": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+        "english": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+        "translations": {
+          "japanese": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "english": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "schinese": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "russian": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "german": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "koreana": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다"
+        }
+      },
+      {
+        "id": "11",
+        "votes_up": 0,
+        "hours_before_review": 24.0,
+        "days_before_review": 1.0,
+        "created_at": "2026-03-07T16:24:55+00:00",
+        "original": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+        "english": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+        "translations": {
+          "japanese": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "english": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "schinese": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "russian": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "german": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다",
+          "koreana": "이 제품은 기존 마인크래프트에서 느낄수 없던 새로운 뭔가를 잘한거같고 던전 요소와 rpg적인 요소를 넣어 훨씬 재밌어서 DLC까지 샀습니다"
+        }
+      },
+      {
+        "id": "10",
+        "votes_up": 0,
+        "hours_before_review": 21.5,
+        "days_before_review": 0.9,
+        "created_at": "2026-01-18T03:31:10+00:00",
+        "original": "👍",
+        "english": "👍",
+        "translations": {
+          "japanese": "👍",
+          "english": "👍",
+          "schinese": "👍",
+          "russian": "👍",
+          "german": "👍",
+          "koreana": "👍"
+        }
+      },
+      {
+        "id": "18",
+        "votes_up": 0,
+        "hours_before_review": 21.5,
+        "days_before_review": 0.9,
+        "created_at": "2026-01-18T03:31:10+00:00",
+        "original": "👍",
+        "english": "👍",
+        "translations": {
+          "japanese": "👍",
+          "english": "👍",
+          "schinese": "👍",
+          "russian": "👍",
+          "german": "👍",
+          "koreana": "👍"
+        }
+      },
+      {
+        "id": "9",
+        "votes_up": 0,
+        "hours_before_review": 13.15,
+        "days_before_review": 0.55,
+        "created_at": "2026-02-15T10:16:11+00:00",
+        "original": "재밌네요",
+        "english": "재밌네요",
+        "translations": {
+          "japanese": "재밌네요",
+          "english": "재밌네요",
+          "schinese": "재밌네요",
+          "russian": "재밌네요",
+          "german": "재밌네요",
+          "koreana": "재밌네요"
+        }
+      },
+      {
+        "id": "17",
+        "votes_up": 0,
+        "hours_before_review": 13.15,
+        "days_before_review": 0.55,
+        "created_at": "2026-02-15T10:16:11+00:00",
+        "original": "재밌네요",
+        "english": "재밌네요",
+        "translations": {
+          "japanese": "재밌네요",
+          "english": "재밌네요",
+          "schinese": "재밌네요",
+          "russian": "재밌네요",
+          "german": "재밌네요",
+          "koreana": "재밌네요"
+        }
+      },
+      {
+        "id": "2",
+        "votes_up": 0,
+        "hours_before_review": 5.85,
+        "days_before_review": 0.24,
+        "created_at": "2026-03-15T03:20:26+00:00",
+        "original": "재밌다 FUN",
+        "english": "재밌다 FUN",
+        "translations": {
+          "japanese": "재밌다 FUN",
+          "english": "재밌다 FUN",
+          "schinese": "재밌다 FUN",
+          "russian": "재밌다 FUN",
+          "german": "재밌다 FUN",
+          "koreana": "재밌다 FUN"
+        }
+      },
+      {
+        "id": "8",
+        "votes_up": 0,
+        "hours_before_review": 5.85,
+        "days_before_review": 0.24,
+        "created_at": "2026-03-15T03:20:26+00:00",
+        "original": "재밌다 FUN",
+        "english": "재밌다 FUN",
+        "translations": {
+          "japanese": "재밌다 FUN",
+          "english": "재밌다 FUN",
+          "schinese": "재밌다 FUN",
+          "russian": "재밌다 FUN",
+          "german": "재밌다 FUN",
+          "koreana": "재밌다 FUN"
+        }
+      },
+      {
+        "id": "16",
+        "votes_up": 0,
+        "hours_before_review": 5.85,
+        "days_before_review": 0.24,
+        "created_at": "2026-03-15T03:20:26+00:00",
+        "original": "재밌다 FUN",
+        "english": "재밌다 FUN",
+        "translations": {
+          "japanese": "재밌다 FUN",
+          "english": "재밌다 FUN",
+          "schinese": "재밌다 FUN",
+          "russian": "재밌다 FUN",
+          "german": "재밌다 FUN",
+          "koreana": "재밌다 FUN"
+        }
+      }
+    ],
+    "neutral": [],
+    "negative": [
+      {
+        "id": "20",
+        "votes_up": 1,
+        "hours_before_review": 66.13,
+        "days_before_review": 2.76,
+        "created_at": "2026-01-14T14:14:57+00:00",
+        "original": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+        "english": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+        "translations": {
+          "japanese": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+          "english": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+          "schinese": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+          "russian": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+          "german": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+          "koreana": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움"
+        }
+      },
+      {
+        "id": "23",
+        "votes_up": 1,
+        "hours_before_review": 66.13,
+        "days_before_review": 2.76,
+        "created_at": "2026-01-14T14:14:57+00:00",
+        "original": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+        "english": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+        "translations": {
+          "japanese": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+          "english": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+          "schinese": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+          "russian": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+          "german": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움",
+          "koreana": "걍 만들다 만 게임 개발 중단도 선언했고 이돈 주고 굳이???? dlc다사야 겜 기본값 값어치하는 정도인데 다사면 진짜 그돈씨 최악의 쓰레기겜 절대 하지마셈 돈 존나아까움"
+        }
+      },
+      {
+        "id": "19",
+        "votes_up": 1,
+        "hours_before_review": 51.2,
+        "days_before_review": 2.13,
+        "created_at": "2026-02-11T13:05:47+00:00",
+        "original": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+        "english": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+        "translations": {
+          "japanese": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+          "english": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+          "schinese": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+          "russian": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+          "german": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+          "koreana": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네"
+        }
+      },
+      {
+        "id": "22",
+        "votes_up": 1,
+        "hours_before_review": 51.2,
+        "days_before_review": 2.13,
+        "created_at": "2026-02-11T13:05:47+00:00",
+        "original": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+        "english": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+        "translations": {
+          "japanese": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+          "english": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+          "schinese": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+          "russian": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+          "german": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네",
+          "koreana": "개발 중단 된 겜 하지마라\n하다보면 컨텐츠 고갈나고 결국 할 건 장비 노가다 뿐 이다\n차라리 그냥 마크 해라\nㅅㅂ 심심하면 튕기네"
+        }
+      },
+      {
+        "id": "21",
+        "votes_up": 0,
+        "hours_before_review": 16.23,
+        "days_before_review": 0.68,
+        "created_at": "2026-02-25T11:53:35+00:00",
+        "original": "게임이 졸림",
+        "english": "게임이 졸림",
+        "translations": {
+          "japanese": "게임이 졸림",
+          "english": "게임이 졸림",
+          "schinese": "게임이 졸림",
+          "russian": "게임이 졸림",
+          "german": "게임이 졸림",
+          "koreana": "게임이 졸림"
+        }
+      },
+      {
+        "id": "24",
+        "votes_up": 0,
+        "hours_before_review": 16.23,
+        "days_before_review": 0.68,
+        "created_at": "2026-02-25T11:53:35+00:00",
+        "original": "게임이 졸림",
+        "english": "게임이 졸림",
+        "translations": {
+          "japanese": "게임이 졸림",
+          "english": "게임이 졸림",
+          "schinese": "게임이 졸림",
+          "russian": "게임이 졸림",
+          "german": "게임이 졸림",
+          "koreana": "게임이 졸림"
+        }
+      }
+    ]
+  }
+}
