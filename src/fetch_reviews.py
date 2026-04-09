@@ -55,7 +55,7 @@ def get_reviews(
     appid: int,
     language: str,
     review_type: ReviewType = "negative",
-    num: int = 200,
+    num: int = 300,
     sleep_sec: float = 1.2,
 ) -> list[dict]:
     """
@@ -184,8 +184,8 @@ def fetch_and_save(
 def run_collection(
     game_list: list[tuple[str, int]] | None = None,
     languages: list[str] | None = None,
-    neg_count: int = 200,
-    pos_count: int = 100,
+    neg_count: int = 300,
+    pos_count: int = 300,
     overwrite: bool = False,
 ) -> list[Path]:
     """
@@ -285,8 +285,8 @@ if __name__ == "__main__":
             "summary: 取得済みファイルの確認"
         ),
     )
-    parser.add_argument("--neg", type=int, default=200, help="ネガティブレビュー取得数")
-    parser.add_argument("--pos", type=int, default=100, help="ポジティブレビュー取得数")
+    parser.add_argument("--neg", type=int, default=300, help="ネガティブレビュー取得数")
+    parser.add_argument("--pos", type=int, default=300, help="ポジティブレビュー取得数")
     parser.add_argument("--overwrite", action="store_true", help="既存ファイルを上書き")
     args = parser.parse_args()
 

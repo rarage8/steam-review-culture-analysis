@@ -7,6 +7,9 @@ from pathlib import Path
 
 from build_dashboard_data import export_dashboard_data
 from fetch_player_counts import collect_player_snapshots
+from fetch_reviews import run_collection
+from translate import run_translation
+from classify import run_classification
 from monitor_games import (
     DEFAULT_MIN_POSITIVE,
     MAX_NEW_PER_RUN,
@@ -20,6 +23,22 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger(__name__)
 
 ROOT = Path(__file__).parent.parent
+RAW_DIR = ROOT / "data" / "raw"
+
+
+def current_review_games() -> list[tuple[str, int]]:
+    game_map: dict[int, str] = {}
+    for path in RAW_DIR.glob("*.json"):
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        meta = payload.get("meta", {})
+        appid = int(meta.get("appid", 0) or 0)
+        title = str(meta.get("title", "")).strip()
+        if appid and title:
+            game_map[appid] = title
+    return sorted(((title, appid) for appid, title in game_map.items()), key=lambda item: item[0].lower())
 
 
 def detect_and_optionally_add_new_games(
@@ -65,6 +84,7 @@ def main() -> None:
     parser.add_argument("--min-positive", type=int, default=DEFAULT_MIN_POSITIVE, help="Minimum positive reviews")
     parser.add_argument("--limit", type=int, default=MAX_NEW_PER_RUN, help="Maximum detected games per run")
     parser.add_argument("--skip-player-counts", action="store_true", help="Skip current-player snapshot collection")
+    parser.add_argument("--skip-review-refresh", action="store_true", help="Skip refreshing review data")
     args = parser.parse_args()
 
     detected_games: list[tuple[str, int]] = []
@@ -78,6 +98,13 @@ def main() -> None:
 
     if not args.skip_player_counts:
         collect_player_snapshots()
+
+    if not args.skip_review_refresh:
+        tracked_games = current_review_games()
+        if tracked_games:
+            run_collection(game_list=tracked_games, overwrite=True, neg_count=300, pos_count=300)
+            run_translation(game_list=tracked_games, overwrite=True)
+            run_classification(game_list=tracked_games, overwrite=True)
 
     export_dashboard_data()
     if detected_games:

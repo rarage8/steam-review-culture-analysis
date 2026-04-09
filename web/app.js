@@ -16,7 +16,6 @@ const I18N = {
     navPopulation: "プレイヤー人口",
     update: "更新",
     updating: "更新中...",
-    updateReady: "更新可能",
     updateCooldown: "次の更新まで",
     updateUnavailable: "更新APIに接続できません",
     updateSuccess: "最新データを取得しました。",
@@ -33,6 +32,7 @@ const I18N = {
     detailCount: "表示件数",
     reviewVotes: "役立ち投票",
     hoursBefore: "レビュー時点の時間",
+    summarized: "要約",
     emptyReviews: "レビューがありません。",
     timingHd: "レビューまでに費やしたプレイ時間",
     timingSub: "言語別かつ感情別に、レビュー投稿時点までの平均プレイ日数を比較します。",
@@ -61,7 +61,6 @@ const I18N = {
     navPopulation: "Player Population",
     update: "Refresh",
     updating: "Refreshing...",
-    updateReady: "Ready",
     updateCooldown: "Next refresh in",
     updateUnavailable: "Refresh API unavailable",
     updateSuccess: "Fetched the latest data.",
@@ -78,6 +77,7 @@ const I18N = {
     detailCount: "Loaded reviews",
     reviewVotes: "Helpful votes",
     hoursBefore: "Hours at review",
+    summarized: "Summary",
     emptyReviews: "No reviews available.",
     timingHd: "Time Spent Before Reviewing",
     timingSub: "Compare average playtime-to-review days by language and sentiment.",
@@ -140,7 +140,7 @@ function translatedReviewText(review) { return review?.translations?.[uiLang] ||
 function renderReviewList(containerId, reviews) {
   const container = document.getElementById(containerId); container.innerHTML = "";
   if (!reviews?.length) { const empty = document.createElement("div"); empty.className = "empty"; empty.textContent = t("emptyReviews"); container.appendChild(empty); return; }
-  reviews.forEach((review) => { const translated = translatedReviewText(review); const original = review.original || review.english || ""; const showOriginal = original && original !== translated; const item = document.createElement("article"); item.className = "review-item"; item.innerHTML = `<div class="review-meta"><span>${t("reviewVotes")}: ${review.votes_up ?? 0}</span><span>${t("hoursBefore")}: ${review.hours_before_review ?? "-"}</span></div><p class="review-main"></p>${showOriginal ? '<p class="review-original"></p>' : ''}`; item.querySelector(".review-main").textContent = translated; if (showOriginal) item.querySelector(".review-original").textContent = original; container.appendChild(item); });
+  reviews.forEach((review) => { const translated = translatedReviewText(review); const original = review.original || ""; const showOriginal = original && original !== translated; const item = document.createElement("article"); item.className = "review-item"; item.innerHTML = `<div class="review-meta"><span>${t("reviewVotes")}: ${review.votes_up ?? 0}</span><span>${t("hoursBefore")}: ${review.hours_before_review ?? "-"}</span>${review.is_summary ? `<span>${t("summarized")}</span>` : ""}</div><p class="review-main"></p>${showOriginal ? '<p class="review-original"></p>' : ''}`; item.querySelector(".review-main").textContent = translated; if (showOriginal) item.querySelector(".review-original").textContent = original; container.appendChild(item); });
 }
 function setReviewLoading() { ["positiveReviews","neutralReviews","negativeReviews"].forEach((id)=>{ const el=document.getElementById(id); el.innerHTML = `<div class="empty">${t("loading")}</div>`; }); }
 async function loadReviewDetails(gameId, langKey, forceRender=false) {
@@ -175,11 +175,30 @@ function applyTheme(nextTheme) { theme = nextTheme; document.documentElement.set
 async function loadDashboardData() { for (const url of ["data/games.json", "data/mock.json"]) { try { const response = await fetch(url + `?t=${Date.now()}`); if (!response.ok) continue; const json = await response.json(); if (json?.games && json?.reviews) return json; } catch (_) {} } throw new Error("dashboard data not found"); }
 async function loadRefreshStatus() { try { const response = await fetch("/api/refresh-status"); if (!response.ok) throw new Error(); const json = await response.json(); refreshCooldownUntil = json.cooldown_until ? Date.parse(json.cooldown_until) : 0; } catch (_) { refreshCooldownUntil = Number(localStorage.getItem("refresh-cooldown-until") || 0); } updateRefreshButton(); }
 function formatRemaining(ms) { const totalSec = Math.max(0, Math.ceil(ms / 1000)); const min = Math.floor(totalSec / 60); const sec = totalSec % 60; return `${min}:${String(sec).padStart(2, "0")}`; }
-function updateRefreshButton() { const btn = document.getElementById("refreshBtn"); const status = document.getElementById("refreshStatus"); const remaining = refreshCooldownUntil - Date.now(); const cooling = remaining > 0; btn.disabled = cooling || btn.dataset.loading === "true"; if (btn.dataset.loading === "true") { btn.textContent = t("updating"); status.textContent = t("loading"); } else if (cooling) { btn.textContent = t("update"); status.textContent = `${t("updateCooldown")}: ${formatRemaining(remaining)}`; } else { btn.textContent = t("update"); status.textContent = t("updateReady"); } }
+function updateRefreshButton() {
+  const btn = document.getElementById("refreshBtn");
+  const status = document.getElementById("refreshStatus");
+  const remaining = refreshCooldownUntil - Date.now();
+  const cooling = remaining > 0;
+  const loading = btn.dataset.loading === "true";
+  btn.disabled = cooling || loading;
+  btn.classList.toggle("cooldown", cooling || loading);
+  btn.classList.toggle("ready", !cooling && !loading);
+  if (loading) {
+    btn.textContent = t("updating");
+    status.textContent = "";
+  } else if (cooling) {
+    btn.textContent = t("update");
+    status.textContent = `${t("updateCooldown")}: ${formatRemaining(remaining)}`;
+  } else {
+    btn.textContent = t("update");
+    status.textContent = "";
+  }
+}
 function startRefreshTicker() { if (refreshTimerId) clearInterval(refreshTimerId); refreshTimerId = setInterval(updateRefreshButton, 1000); }
 async function refreshDashboard() { const btn = document.getElementById("refreshBtn"); const status = document.getElementById("refreshStatus"); if (refreshCooldownUntil > Date.now()) return; btn.dataset.loading = "true"; updateRefreshButton(); try { const response = await fetch("/api/refresh", { method: "POST" }); if (!response.ok) throw new Error(); const json = await response.json(); refreshCooldownUntil = json.cooldown_until ? Date.parse(json.cooldown_until) : Date.now() + 5 * 60 * 1000; localStorage.setItem("refresh-cooldown-until", String(refreshCooldownUntil)); status.textContent = t("updateSuccess"); dashboard = await loadDashboardData(); reviewDetailsCache = new Map(); await initialize(dashboard); } catch (_) { status.textContent = t("updateFail"); } finally { btn.dataset.loading = "false"; updateRefreshButton(); } }
 async function initialize(data) { dashboard = data; if (!dashboard.games?.length) throw new Error("No games in dashboard data"); if (!selectedPopulationGames.length) selectedPopulationGames = dashboard.games.slice(0, Math.min(5, dashboard.games.length)).map((game)=>game.id); renderStaticText(); buildGameSelector("populationGameSelector", selectedPopulationGames, togglePopulationGame); renderPeriodSelector(); await selectReviewGame(currentGameId || dashboard.games[0].id); renderPopulationChart(); }
-document.getElementById("uiLangSel").addEventListener("change", async (event)=>{ uiLang = event.target.value; localStorage.setItem("steam-lang", uiLang); renderStaticText(); buildGameSelector("reviewGameSelector", [currentGameId], selectReviewGame); buildGameSelector("populationGameSelector", selectedPopulationGames, togglePopulationGame); renderLanguageCards(); renderTimingChart(); renderTimingStats(); renderPeriodSelector(); renderPopulationChart(); renderReviewPanel(); });
+document.getElementById("uiLangSel").addEventListener("change", async (event)=>{ uiLang = event.target.value; localStorage.setItem("steam-lang", uiLang); renderStaticText(); buildGameSelector("reviewGameSelector", [currentGameId], selectReviewGame); buildGameSelector("populationGameSelector", selectedPopulationGames, togglePopulationGame); renderLanguageCards(); renderTimingChart(); renderTimingStats(); renderPeriodSelector(); renderPopulationChart(); if (currentGameId && selectedReviewLang) { await loadReviewDetails(currentGameId, selectedReviewLang, true); } else { renderReviewPanel(); } });
 document.getElementById("themeBtn").addEventListener("click", ()=>applyTheme(theme === "dark" ? "light" : "dark"));
 document.getElementById("refreshBtn").addEventListener("click", refreshDashboard);
 document.querySelectorAll(".nav-btn").forEach((btn)=>btn.addEventListener("click", ()=>navigate(btn.dataset.page)));

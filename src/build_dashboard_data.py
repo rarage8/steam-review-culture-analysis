@@ -36,6 +36,8 @@ LANGUAGES = ["japanese", "english", "schinese", "russian", "german", "koreana"]
 REVIEW_TYPES = ["positive", "negative"]
 TRANSLATION_BATCH_SIZE = 20
 TRANSLATION_MODEL = "claude-sonnet-4-5"
+SUMMARY_BATCH_SIZE = 10
+SUMMARY_CHAR_THRESHOLD = 500
 
 
 @dataclass
@@ -249,6 +251,38 @@ def translate_batch(
     return texts
 
 
+def summarize_batch(texts: list[str], client: Any | None) -> list[str]:
+    if not texts:
+        return []
+    if client is None:
+        return [text[:280].strip() + ("..." if len(text) > 280 else "") for text in texts]
+
+    numbered = "\n\n".join(f"[{i + 1}] {text}" for i, text in enumerate(texts))
+    prompt = (
+        "Summarize each Steam game review below in English.\n"
+        "Keep the key opinion, verdict, and strongest reasons.\n"
+        "Each summary must stay under 220 characters.\n"
+        "Return only a JSON array of strings in the same order.\n\n"
+        f"{numbered}"
+    )
+    try:
+        response = client.messages.create(
+            model=TRANSLATION_MODEL,
+            max_tokens=4096,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw = response.content[0].text.strip()
+        start = raw.find("[")
+        end = raw.rfind("]")
+        if start >= 0 and end > start:
+            summarized = json.loads(raw[start : end + 1])
+            if isinstance(summarized, list) and len(summarized) == len(texts):
+                return [_normalize_text(text) for text in summarized]
+    except Exception as exc:  # pragma: no cover
+        logger.warning("Summary fallback: %s", exc)
+    return [text[:280].strip() + ("..." if len(text) > 280 else "") for text in texts]
+
+
 def translate_review_rows(
     review_rows: list[dict[str, Any]],
     source_language: str,
@@ -308,6 +342,7 @@ def translate_review_rows(
         translated_reviews.append(
             {
                 "id": row["id"],
+                "is_summary": bool(row.get("is_summary", False)),
                 "votes_up": row["votes_up"],
                 "hours_before_review": row["hours_before_review"],
                 "days_before_review": row["days_before_review"],
@@ -343,7 +378,7 @@ def summarize_timing(df: pd.DataFrame) -> dict[str, float | int | None]:
 def exportable_review_rows(df: pd.DataFrame) -> list[dict[str, Any]]:
     if df.empty:
         return []
-    ranked = df.sort_values(["votes_up", "time_spent_before_review_h"], ascending=[False, False])
+    ranked = df.sort_values(["timestamp_created", "votes_up"], ascending=[False, False], na_position="last")
     rows: list[dict[str, Any]] = []
     for idx, row in ranked.iterrows():
         original = _normalize_text(row.get("review_text_orig"))
@@ -370,6 +405,37 @@ def exportable_review_rows(df: pd.DataFrame) -> list[dict[str, Any]]:
             }
         )
     return rows
+
+
+def apply_review_summaries(
+    review_rows: list[dict[str, Any]],
+    client: Any | None,
+) -> list[dict[str, Any]]:
+    if not review_rows:
+        return []
+
+    long_indices: list[int] = []
+    texts_to_summarize: list[str] = []
+    for index, row in enumerate(review_rows):
+        source_text = row["english"] or row["original"]
+        if len(source_text) > SUMMARY_CHAR_THRESHOLD:
+            long_indices.append(index)
+            texts_to_summarize.append(source_text)
+
+    if not long_indices:
+        return review_rows
+
+    summaries: list[str] = []
+    for start in range(0, len(texts_to_summarize), SUMMARY_BATCH_SIZE):
+        batch = texts_to_summarize[start : start + SUMMARY_BATCH_SIZE]
+        summaries.extend(summarize_batch(batch, client))
+
+    updated = [dict(row) for row in review_rows]
+    for index, summary in zip(long_indices, summaries):
+        updated[index]["english"] = summary
+        updated[index]["original"] = ""
+        updated[index]["is_summary"] = True
+    return updated
 
 
 def load_population_snapshots() -> pd.DataFrame:
@@ -492,7 +558,10 @@ def build_dashboard_data(
 
             detail_reviews = {
                 sentiment: translate_review_rows(
-                    exportable_review_rows(frame),
+                    apply_review_summaries(
+                        exportable_review_rows(frame),
+                        translation_client,
+                    ),
                     source_language=language,
                     client=translation_client,
                     cache=translation_cache,
